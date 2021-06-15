@@ -82,12 +82,20 @@ IFSelect_ReturnStatus Step_Parser::ReadStep(const Standard_CString& fileName, ve
 
 		if (strcmp(axis->Name()->ToCString(), "CSW") == 0)
 		{
-			result.csw = axis;
+			result.csws->push_back(axis);
+			continue;
+		}
+
+		if (strncmp(axis->Name()->ToCString(), "CSW_", 4) == 0)
+		{
+			result.csws->push_back(axis);
+			result.shapes->push_back(result.shapes->at(0).EmptyCopied());
+
 			continue;
 		}
 	}
 
-	if (result.csw.IsNull() && result.mcs.IsNull())
+	if (result.csws->empty() && result.mcs.IsNull())
 		throw runtime_error("Mandatory CSW or MCS coordinate systems not found");
 
 	output.push_back(result);
