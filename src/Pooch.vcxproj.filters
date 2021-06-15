@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Input">
+      <UniqueIdentifier>{60d90157-5b15-49d4-bcdd-190cfd9a49ee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pch">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="Input.cpp">
+      <Filter>Input</Filter>
+    </ClCompile>
+    <ClCompile Include="pch.cpp">
+      <Filter>Pch</Filter>
+    </ClCompile>
+    <ClCompile Include="Step_Parser.cpp" />
+    <ClCompile Include="Step_Data.cpp" />
+    <ClCompile Include="Step_Exporter.cpp" />
+    <ClCompile Include="Step_Transformer.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="pch.h">
+      <Filter>Pch</Filter>
+    </ClInclude>
+    <ClInclude Include="Input.h">
+      <Filter>Input</Filter>
+    </ClInclude>
+    <ClInclude Include="optionparser.h">
+      <Filter>Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Step_Parser.h" />
+    <ClInclude Include="Step_Data.h" />
+    <ClInclude Include="Step_Exporter.h" />
+    <ClInclude Include="Step_Transformer.h" />
+  </ItemGroup>
+</Project>
