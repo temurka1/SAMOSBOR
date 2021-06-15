@@ -11,35 +11,6 @@ void Step_Transformer::Transform(vector<Step_Data>& data, float extensionLength)
 	if (data.size() < 1)
 		throw runtime_error("No files to export");
 
-	for (auto it = data.begin(); it != data.end(); ++it)
-	{
-		if (!it->csw.IsNull())
-		{
-			auto axis = StepToGeom::MakeAxis2Placement(it->csw);
-
-			std::cout << "CSW" << std::endl;
-
-			std::cout << axis->XDirection().X() << axis->XDirection().Y() << axis->XDirection().Z() << std::endl;
-			std::cout << axis->YDirection().X() << axis->YDirection().Y() << axis->YDirection().Z() << std::endl;
-
-			std::cout << axis->Location().X() << axis->Location().Y() << axis->Location().Z() << std::endl;
-			std::cout << "" << std::endl;
-		}
-		
-		if (!it->mcs.IsNull())
-		{
-			auto axis = StepToGeom::MakeAxis2Placement(it->mcs);
-
-			std::cout << "MCS" << std::endl;			
-			
-			std::cout << axis->XDirection().X() << axis->XDirection().Y() << axis->XDirection().Z() << std::endl;
-			std::cout << axis->YDirection().X() << axis->YDirection().Y() << axis->YDirection().Z() << std::endl;
-
-			std::cout << axis->Location().X() << axis->Location().Y() << axis->Location().Z() << std::endl;
-			std::cout << "" << std::endl;
-		}
-	}
-
 	auto csw = StepToGeom::MakeAxis2Placement(data[0].csw);
 	if (csw.IsNull())
 		throw runtime_error("CSW not found");
