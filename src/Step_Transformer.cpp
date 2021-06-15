@@ -1,8 +1,6 @@
 #include "pch.h"
 #include "Step_Transformer.h"
 #include "Step_Data.h"
-#include <Geom_Axis2Placement.hxx>
-#include <StepToGeom.hxx>
 
 using namespace std;
 

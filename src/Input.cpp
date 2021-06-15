@@ -48,7 +48,7 @@ float Input::GetExtensionLength() const
 	if (!parser->error())
 	{
 		auto opt = options[OptionIndex::EXTENSION_LENGTH];
-		return atof(opt.arg);
+		return opt.arg != nullptr ? atof(opt.arg) : 0.0f;
 	}
 	
 	return 0.0f;
