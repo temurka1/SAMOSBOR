@@ -1,40 +1,62 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Input">
-      <UniqueIdentifier>{60d90157-5b15-49d4-bcdd-190cfd9a49ee}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Pch">
+    <Filter Include="pch">
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="input">
+      <UniqueIdentifier>{614d4105-bad4-469f-9323-c2e00aa9c0eb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="assembly">
+      <UniqueIdentifier>{c07f060e-5678-4d74-b4f8-d8638f8face6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="step">
+      <UniqueIdentifier>{9d49a066-7317-493f-b7af-fd06f5774f45}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Input.cpp">
-      <Filter>Input</Filter>
-    </ClCompile>
     <ClCompile Include="pch.cpp">
-      <Filter>Pch</Filter>
+      <Filter>pch</Filter>
     </ClCompile>
-    <ClCompile Include="Step_Parser.cpp" />
-    <ClCompile Include="Step_Data.cpp" />
-    <ClCompile Include="Step_Exporter.cpp" />
-    <ClCompile Include="Step_Transformer.cpp" />
+    <ClCompile Include="InputOptions.cpp">
+      <Filter>input</Filter>
+    </ClCompile>
+    <ClCompile Include="Assembly_Parser.cpp">
+      <Filter>assembly</Filter>
+    </ClCompile>
+    <ClCompile Include="Assembly_GraphBuilder.cpp">
+      <Filter>assembly</Filter>
+    </ClCompile>
+    <ClCompile Include="Step_Reader.cpp">
+      <Filter>step</Filter>
+    </ClCompile>
+    <ClCompile Include="Step_Writer.cpp">
+      <Filter>step</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
-      <Filter>Pch</Filter>
+      <Filter>pch</Filter>
     </ClInclude>
-    <ClInclude Include="Input.h">
-      <Filter>Input</Filter>
+    <ClInclude Include="resource.h">
+      <Filter>pch</Filter>
     </ClInclude>
-    <ClInclude Include="optionparser.h">
-      <Filter>Input</Filter>
+    <ClInclude Include="InputOptions.h">
+      <Filter>input</Filter>
     </ClInclude>
-    <ClInclude Include="Step_Parser.h" />
-    <ClInclude Include="Step_Data.h" />
-    <ClInclude Include="Step_Exporter.h" />
-    <ClInclude Include="Step_Transformer.h" />
+    <ClInclude Include="Assembly_Parser.h">
+      <Filter>assembly</Filter>
+    </ClInclude>
+    <ClInclude Include="Assembly_GraphBuilder.h">
+      <Filter>assembly</Filter>
+    </ClInclude>
+    <ClInclude Include="Step_Reader.h">
+      <Filter>step</Filter>
+    </ClInclude>
+    <ClInclude Include="Step_Writer.h">
+      <Filter>step</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

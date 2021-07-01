@@ -4,12 +4,13 @@
 #include "pch.h"
 #include <iostream>
 
-#include "Input.h"
+#include "InputOptions.h"
 
-#include "Step_Data.h"
-#include "Step_Parser.h"
-#include "Step_Exporter.h"
-#include "Step_Transformer.h"
+#include "Step_Reader.h"
+#include "Step_Writer.h"
+
+#include "Assembly_Parser.h"
+#include "Assembly_GraphBuilder.h"
 
 #pragma comment (lib, "TKernel.lib")
 #pragma comment (lib, "TKXSBase.lib")
@@ -18,32 +19,26 @@
 #pragma comment (lib, "TKG3d.lib")
 #pragma comment (lib, "TKMath.lib")
 
-//
-// Usage:
-// ./pooch.exe -f 264181.stp -f 281314.stp -l 20 -o assembly.stp
-// -f defines input files (one "-f" per file)
-// -o defines ouput assembly file
-// -l defines extension length
-//
 int main(int argc, char* argv[])
 {
-	Input input(argc, argv);
+	pooch::input::InputOptions input(argc, argv);
 
-	auto inputFiles = input.GetInputFiles();
-	auto outputFile = input.GetOutputFile();
-	auto extensionLength = input.GetExtensionLength();
+	pooch::step::Step_Reader stepReader;
+	pooch::step::Step_Writer stepWriter;
 
-	Step_Parser parser;
-	Step_Transformer transformer;
-	Step_Exporter exporter;
+	pooch::assembly::Assembly_Parser assemblyParser;
+	pooch::assembly::Assembly_GraphBuilder graphBuilder(stepReader);
 
 	try
 	{
-		auto data = parser.Parse(inputFiles);
-		transformer.Transform(data, extensionLength);
-		exporter.Export(outputFile, data);
+		auto outputFile = input.GetAssemblyOutputFile();
+		auto structureFile = input.GetAssemblyStructureFile();
+		auto extensionLength = input.GetExtensionLength();
+
+		auto parsedItems = assemblyParser.Parse(structureFile);
+		auto graph = graphBuilder.Build(parsedItems, extensionLength);
 	}
-	catch (std::exception ex)
+	catch (std::runtime_error ex)
 	{
 		std::cout << ex.what() << std::endl;
 	}
