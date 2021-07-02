@@ -49,7 +49,7 @@ namespace pooch::assembly
 		graph[rootNode].shape = rootStepData.shape;
 		graph[rootNode].id = root->id;
 
-		BuildInternal(graph, rootNode, rootStepData, root, parsed, extensionLength);
+		BuildInternal(graph, rootNode, rootStepData, nullptr, root, parsed, extensionLength);
 
 #ifdef _DEBUG
 		boost::write_graphviz(cout, graph, [&](auto& out, auto v) 
@@ -67,6 +67,7 @@ namespace pooch::assembly
 		AssemblyGraph& graph,
 		const vertex_t& rootNode,
 		const Step_Data& rootStepData,
+		const shared_ptr<gp_Trsf>& rootTransform,
 		const shared_ptr<Assembly_ParsedItem>& root,
 		const vector<shared_ptr<Assembly_ParsedItem>>& parsed,
 		const float extensionLength)
@@ -99,6 +100,11 @@ namespace pooch::assembly
 				gp_Trsf translation;
 				translation.SetTranslation(gp_Vec(0.0, 0.0, extensionLength));
 
+				if (rootTransform != nullptr)
+				{
+					displacement->PreMultiply(*rootTransform);
+				}
+
 				displacement->Multiply(translation);
 
 				// fill graph nodes/edges
@@ -115,7 +121,7 @@ namespace pooch::assembly
 				graph[childNode].id = child->id;
 				graph[edge].transform = displacement;
 
-				BuildInternal(graph, childNode, childStepData, child, parsed, extensionLength);
+				BuildInternal(graph, childNode, childStepData, displacement, child, parsed, extensionLength);
 			}
 		}
 	}

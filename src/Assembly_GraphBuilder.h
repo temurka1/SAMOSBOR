@@ -40,6 +40,7 @@ namespace pooch::assembly
 			AssemblyGraph& graph, 
 			const vertex_t& rootNode, 
 			const pooch::step::Step_Data& rootStepData, 
+			const std::shared_ptr<gp_Trsf>& rootTransform,
 			const std::shared_ptr<Assembly_ParsedItem>& root,
 			const std::vector<std::shared_ptr<Assembly_ParsedItem>>& parsed,
 			const float extensionLength);

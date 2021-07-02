@@ -5,13 +5,16 @@
             "id": "38929E97-D5B6-4071-A851-A9E6A5C3964F",
             "parent_id": "00000000-0000-0000-0000-000000000000",
             "file": "15107_10.stp",
-            "csw_slot": ""
+            "csw_slots": []
         },
         {
             "id": "4DA09192-E9B9-4EF5-947B-E1727BBDB994",
             "parent_id": "38929E97-D5B6-4071-A851-A9E6A5C3964F",
             "file": "20_71.stp",
-            "csw_slot": ""
+            "csw_slots": 
+            [
+                "CSW"
+            ]
         }
     ]
 }
