@@ -8,9 +8,9 @@ namespace pooch::assembly
 		boost::uuids::uuid parentId;
 
 		std::string filename;
-		int cswSlot;
+		std::vector<std::string> cswSlots;
 
-		Assembly_ParsedItem(boost::uuids::uuid id, boost::uuids::uuid parentId, std::string filename, std::string cswSlot);
+		Assembly_ParsedItem(boost::uuids::uuid id, boost::uuids::uuid parentId, std::string filename, std::vector<std::string> cswSlot);
 		~Assembly_ParsedItem();
 	};
 

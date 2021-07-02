@@ -14,9 +14,10 @@ namespace pooch::assembly
         auto shape = graph[v].shape;
 
 #ifdef _DEBUG
-        cout << graph[v].id << endl;
+        cout << v << " " << graph[v].id << endl;
 #endif
 
+        // root node
         if (v == boost::vertex(0, graph))
         {
             _outShapes->push_back(shape);
@@ -24,15 +25,20 @@ namespace pooch::assembly
         }
 
         auto it = boost::in_edges(v, graph);
-
         for (in_edge_iterator_t ei = it.first, ei_end = it.second; ei != ei_end; ++ei)
         {
-            auto transform = graph[*ei].transform;
+            auto target = boost::target(*ei, graph);
+            auto source = boost::source(*ei, graph);
 
-            TopLoc_Location loc(*transform);
-            shape->Move(loc);
+            if (source < v)
+            {
+                auto transform = graph[*ei].transform;
 
-            _outShapes->push_back(shape);
+                TopLoc_Location loc(*transform);
+                shape->Move(loc);
+
+                _outShapes->push_back(shape);
+            }
         }
     }
 }

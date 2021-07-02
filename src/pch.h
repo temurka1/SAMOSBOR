@@ -21,6 +21,7 @@
 #include <Interface_Static.hxx>
 #include <Geom_Axis2Placement.hxx>
 #include <StepToGeom.hxx>
+#include <BRepBuilderAPI_Copy.hxx>
 
 #include <gp_Pnt2d.hxx>
 #include <gp_Ax3.hxx>

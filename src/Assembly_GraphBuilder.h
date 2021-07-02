@@ -48,7 +48,7 @@ namespace pooch::assembly
 
 		std::vector<std::shared_ptr<Assembly_ParsedItem>> GetChildren(const std::shared_ptr<Assembly_ParsedItem>& parent, const std::vector<std::shared_ptr<Assembly_ParsedItem>>& parsed) const;
 
-		std::shared_ptr<std::vector<Handle(Geom_Axis2Placement)>> GetCsws(const pooch::step::Step_Data& stepData) const;
+		std::shared_ptr<std::map<std::string, Handle(Geom_Axis2Placement)>> GetCsws(const pooch::step::Step_Data& stepData) const;
 	private:
 		pooch::step::Step_Reader _stepReader;
 	};

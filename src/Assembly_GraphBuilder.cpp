@@ -79,31 +79,44 @@ namespace pooch::assembly
 
 		for (auto child : children)
 		{
-			vertex_t childNode = boost::add_vertex(graph);
-
 			auto childStepData = _stepReader.Read(child->filename);
 			auto childMcs = StepToGeom::MakeAxis2Placement(childStepData.mcs);
 
-			bool b;
-			edge_t edge; 
-			boost::tie(edge, b) = boost::add_edge(rootNode, childNode, graph);
-
-			gp_Ax3 ax3Csw(rootCsws->at(child->cswSlot)->Ax2());
+			// mcs
 			gp_Ax3 ax3Mcs(childMcs->Ax2());
 
-			auto displacement = make_shared<gp_Trsf>();
-			displacement->SetDisplacement(ax3Mcs, ax3Csw);
+			// csw's
+			//
+			for (auto cswSlot : child->cswSlots)
+			{
+				// calculate csw -> mcs transformation matrix
+				//
+				gp_Ax3 ax3Csw(rootCsws->find(cswSlot)->second->Ax2());
 
-			gp_Trsf translation;
-			translation.SetTranslation(gp_Vec(0.0, 0.0, extensionLength));
+				auto displacement = make_shared<gp_Trsf>();
+				displacement->SetDisplacement(ax3Mcs, ax3Csw);
 
-			displacement->Multiply(translation);
+				gp_Trsf translation;
+				translation.SetTranslation(gp_Vec(0.0, 0.0, extensionLength));
 
-			graph[childNode].shape = childStepData.shape;
-			graph[childNode].id = child->id;
-			graph[edge].transform = displacement;
+				displacement->Multiply(translation);
 
-			BuildInternal(graph, childNode, childStepData, child, parsed, extensionLength);
+				// fill graph nodes/edges
+				//
+				vertex_t childNode = boost::add_vertex(graph);
+
+				bool b;
+				edge_t edge;
+				boost::tie(edge, b) = boost::add_edge(rootNode, childNode, graph);
+
+				BRepBuilderAPI_Copy copyApi(*childStepData.shape);
+
+				graph[childNode].shape = make_shared<TopoDS_Shape>(copyApi.Shape());
+				graph[childNode].id = child->id;
+				graph[edge].transform = displacement;
+
+				BuildInternal(graph, childNode, childStepData, child, parsed, extensionLength);
+			}
 		}
 	}
 
@@ -130,13 +143,13 @@ namespace pooch::assembly
 		return children;
 	}
 
-	shared_ptr<vector<Handle(Geom_Axis2Placement)>> Assembly_GraphBuilder::GetCsws(const Step_Data& stepData) const
+	shared_ptr<map<string, Handle(Geom_Axis2Placement)>> Assembly_GraphBuilder::GetCsws(const Step_Data& stepData) const
 	{
-		auto result = make_shared<vector<Handle(Geom_Axis2Placement)>>();
+		auto result = make_shared<map<string, Handle(Geom_Axis2Placement)>>();
 
 		for (auto csw : *(stepData.csws))
 		{
-			result->push_back(StepToGeom::MakeAxis2Placement(csw));
+			result->insert(make_pair(csw.first, StepToGeom::MakeAxis2Placement(csw.second)));
 		}
 
 		return result;

@@ -8,7 +8,7 @@ namespace pooch::step
 	Step_Data::Step_Data() : mcs(nullptr)
 	{
 		this->shape = make_shared<TopoDS_Shape>();
-		this->csws = make_shared<vector<Handle(StepGeom_Axis2Placement3d)>>();
+		this->csws = make_shared<map<string, Handle(StepGeom_Axis2Placement3d)>>();
 	}
 
 	Step_Data::~Step_Data()
@@ -78,22 +78,19 @@ namespace pooch::step
 				continue;
 
 			auto axis = Handle(StepGeom_Axis2Placement3d)::DownCast(entity);
+			auto axisName = axis->Name()->ToCString();
 
-			if (strcmp(axis->Name()->ToCString(), "MCS") == 0)
+			if (strcmp(axisName, "MCS") == 0)
 			{
 				result.mcs = axis;
 				continue;
 			}
 
-			if (strcmp(axis->Name()->ToCString(), "CSW") == 0)
+			if (strncmp(axisName, "CSW", 3) == 0)
 			{
-				result.csws->push_back(axis);
-				continue;
-			}
-
-			if (strncmp(axis->Name()->ToCString(), "CSW_", 4) == 0)
-			{
-				result.csws->push_back(axis);
+				// CSW, CSW1, CSW1_2, CSW_1_1, etc
+				//
+				result.csws->insert(make_pair(string(axisName), axis));
 				continue;
 			}
 		}

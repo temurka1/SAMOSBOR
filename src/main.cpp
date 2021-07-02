@@ -19,6 +19,8 @@
 #pragma comment (lib, "TKSTEP.lib")
 #pragma comment (lib, "TKG3d.lib")
 #pragma comment (lib, "TKMath.lib")
+#pragma comment (lib, "TKTopAlgo.lib")
+#pragma comment (lib, "TKBRep.lib")
 
 int main(int argc, char* argv[])
 {

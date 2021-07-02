@@ -11,10 +11,9 @@ using boost::property_tree::ptree;
 
 namespace pooch::assembly
 {
-    Assembly_ParsedItem::Assembly_ParsedItem(uuid _id, uuid _parentId, string _filename, string _cswSlot)
-        : id(_id), parentId(_parentId), filename(_filename)
+    Assembly_ParsedItem::Assembly_ParsedItem(uuid _id, uuid _parentId, string _filename, std::vector<std::string> _cswSlots)
+        : id(_id), parentId(_parentId), filename(_filename), cswSlots(_cswSlots)
     {
-        this->cswSlot = _cswSlot.empty() ? 0 : stoi(_cswSlot);
     }
 
     Assembly_ParsedItem::~Assembly_ParsedItem()
@@ -33,9 +32,15 @@ namespace pooch::assembly
             auto id = boost::lexical_cast<uuid>(child.second.get<string>("id"));
             auto parentId = boost::lexical_cast<uuid>(child.second.get<string>("parent_id"));
             auto file = child.second.get<string>("file");
-            auto cswSlot = child.second.get<string>("csw_slot");
 
-            result.push_back(shared_ptr<Assembly_ParsedItem>(new Assembly_ParsedItem(id, parentId, file, cswSlot)));
+            vector<string> cswSlots;
+
+            BOOST_FOREACH(const ptree::value_type & cswSlot, child.second.get_child("csw_slots"))
+            {
+                cswSlots.push_back(cswSlot.second.get_value<string>());
+            }
+
+            result.push_back(shared_ptr<Assembly_ParsedItem>(new Assembly_ParsedItem(id, parentId, file, cswSlots)));
         }
 
         return result;

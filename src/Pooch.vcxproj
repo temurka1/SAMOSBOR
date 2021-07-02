@@ -132,7 +132,7 @@
       <AdditionalLibraryDirectories>C:\boost_1_76_0\lib64-msvc-14.2;C:\OpenCASCADE-7.5.0-vc14-64\opencascade-7.5.0\win64\vc14\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy /y /d  "..\data\*.stp" "$(TargetDir)"</Command>
+      <Command>xcopy /y /d /E  "..\data" "$(TargetDir)"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">

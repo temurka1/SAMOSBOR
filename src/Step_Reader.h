@@ -5,7 +5,7 @@ namespace pooch::step
 	struct Step_Data
 	{
 		Handle(StepGeom_Axis2Placement3d) mcs;
-		std::shared_ptr<std::vector<Handle(StepGeom_Axis2Placement3d)>> csws;
+		std::shared_ptr<std::map<std::string, Handle(StepGeom_Axis2Placement3d)>> csws;
 
 		std::shared_ptr<TopoDS_Shape> shape;
 
