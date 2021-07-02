@@ -9,7 +9,7 @@ namespace pooch::assembly
 	public:
 		Assembly_TransformationVisitor(std::vector<std::shared_ptr<TopoDS_Shape>>* outShapes);
 
-		void discover_vertex(vertex_t v, const AssemblyGraph& graph) const;
+		void finish_vertex(vertex_t v, const AssemblyGraph& graph) const;
 	private:
 		std::vector<std::shared_ptr<TopoDS_Shape>>* _outShapes;
 	};

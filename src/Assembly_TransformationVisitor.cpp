@@ -9,12 +9,12 @@ namespace pooch::assembly
     {
     }
 
-    void Assembly_TransformationVisitor::discover_vertex(vertex_t v, const AssemblyGraph& graph) const
+    void Assembly_TransformationVisitor::finish_vertex(vertex_t v, const AssemblyGraph& graph) const
     {
         auto shape = graph[v].shape;
 
 #ifdef _DEBUG
-        cout << v << " " << graph[v].id << endl;
+        cout << "vertex = " << v << " " << graph[v].id << endl;
 #endif
 
         // root node
@@ -32,6 +32,10 @@ namespace pooch::assembly
 
             if (source < v)
             {
+#ifdef _DEBUG
+                cout << "edge = source: " << source << " target: " << target << endl;
+#endif
+
                 auto transform = graph[*ei].transform;
 
                 TopLoc_Location loc(*transform);
