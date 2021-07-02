@@ -5,7 +5,7 @@ using namespace std;
 
 namespace pooch::step
 {
-	void Step_Writer::Export(const std::string& filename, std::vector<std::shared_ptr<TopoDS_Shape>>& data)
+	void Step_Writer::Write(const string& filename, const vector<shared_ptr<TopoDS_Shape>>& data)
 	{
 		STEPControl_Writer writer;
 

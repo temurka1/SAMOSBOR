@@ -8,6 +8,7 @@ namespace pooch::assembly
 
 	struct Assembly_Node
 	{
+		boost::uuids::uuid id;
 		std::shared_ptr<TopoDS_Shape> shape;
 
 		Assembly_Node();
@@ -22,9 +23,10 @@ namespace pooch::assembly
 		~Assembly_Edge();
 	};
 
-	typedef boost::adjacency_list<boost::vecS, boost::vecS, boost::bidirectionalS, Assembly_Node, Assembly_Edge> AssemblyGraph;
+	typedef boost::adjacency_list<boost::vecS, boost::vecS, boost::undirectedS, Assembly_Node, Assembly_Edge> AssemblyGraph;
 	typedef boost::graph_traits<AssemblyGraph>::vertex_descriptor vertex_t;
 	typedef boost::graph_traits<AssemblyGraph>::edge_descriptor edge_t;
+	typedef boost::graph_traits<AssemblyGraph>::in_edge_iterator in_edge_iterator_t;
 
 	class Assembly_GraphBuilder
 	{
@@ -44,9 +46,7 @@ namespace pooch::assembly
 
 		std::shared_ptr<Assembly_ParsedItem> GetRoot(const std::vector<std::shared_ptr<Assembly_ParsedItem>>& parsed) const;
 
-		std::vector<std::shared_ptr<Assembly_ParsedItem>> GetChildren(
-			const std::shared_ptr<Assembly_ParsedItem>& parent, 
-			const std::vector<std::shared_ptr<Assembly_ParsedItem>>& parsed) const;
+		std::vector<std::shared_ptr<Assembly_ParsedItem>> GetChildren(const std::shared_ptr<Assembly_ParsedItem>& parent, const std::vector<std::shared_ptr<Assembly_ParsedItem>>& parsed) const;
 
 		std::shared_ptr<std::vector<Handle(Geom_Axis2Placement)>> GetCsws(const pooch::step::Step_Data& stepData) const;
 	private:

@@ -1,6 +1,6 @@
 #include "pch.h"
-#include "Assembly_GraphBuilder.h"
 #include "Assembly_Parser.h"
+#include "Assembly_GraphBuilder.h"
 
 using namespace std;
 using namespace pooch::step;
@@ -27,7 +27,7 @@ namespace pooch::assembly
 		this->transform = nullptr;
 	}
 
-	Assembly_GraphBuilder::Assembly_GraphBuilder(const pooch::step::Step_Reader& stepReader) : _stepReader(stepReader)
+	Assembly_GraphBuilder::Assembly_GraphBuilder(const Step_Reader& stepReader) : _stepReader(stepReader)
 	{
 	}
 
@@ -45,9 +45,20 @@ namespace pooch::assembly
 		vertex_t rootNode = boost::add_vertex(graph);
 
 		auto rootStepData = _stepReader.Read(root->filename);
+
 		graph[rootNode].shape = rootStepData.shape;
+		graph[rootNode].id = root->id;
 
 		BuildInternal(graph, rootNode, rootStepData, root, parsed, extensionLength);
+
+#ifdef _DEBUG
+		boost::write_graphviz(cout, graph, [&](auto& out, auto v) 
+		{
+			out << "[id=\"" << graph[v].id << "\"]";
+		});
+#endif
+
+		cout << flush;
 
 		return graph;
 	}
@@ -89,6 +100,7 @@ namespace pooch::assembly
 			displacement->Multiply(translation);
 
 			graph[childNode].shape = childStepData.shape;
+			graph[childNode].id = child->id;
 			graph[edge].transform = displacement;
 
 			BuildInternal(graph, childNode, childStepData, child, parsed, extensionLength);

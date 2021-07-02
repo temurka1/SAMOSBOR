@@ -4,7 +4,8 @@ namespace pooch::step
 {
 	class Step_Writer
 	{
-		void Export(const std::string& filename, std::vector<std::shared_ptr<TopoDS_Shape>>& data);
+	public:
+		void Write(const std::string& filename, const std::vector<std::shared_ptr<TopoDS_Shape>>& data);
 	};
 }
 

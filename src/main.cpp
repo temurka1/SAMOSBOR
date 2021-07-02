@@ -11,6 +11,7 @@
 
 #include "Assembly_Parser.h"
 #include "Assembly_GraphBuilder.h"
+#include "Assembly_TransformationVisitor.h"
 
 #pragma comment (lib, "TKernel.lib")
 #pragma comment (lib, "TKXSBase.lib")
@@ -21,6 +22,8 @@
 
 int main(int argc, char* argv[])
 {
+	std::vector<std::shared_ptr<TopoDS_Shape>> outShapes;
+
 	pooch::input::InputOptions input(argc, argv);
 
 	pooch::step::Step_Reader stepReader;
@@ -28,6 +31,7 @@ int main(int argc, char* argv[])
 
 	pooch::assembly::Assembly_Parser assemblyParser;
 	pooch::assembly::Assembly_GraphBuilder graphBuilder(stepReader);
+	pooch::assembly::Assembly_TransformationVisitor transformationVisitor(&outShapes);
 
 	try
 	{
@@ -37,6 +41,10 @@ int main(int argc, char* argv[])
 
 		auto parsedItems = assemblyParser.Parse(structureFile);
 		auto graph = graphBuilder.Build(parsedItems, extensionLength);
+
+		boost::depth_first_search(graph, boost::visitor(transformationVisitor));
+
+		stepWriter.Write(outputFile, outShapes);
 	}
 	catch (std::runtime_error ex)
 	{
