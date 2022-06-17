@@ -7,13 +7,13 @@
 #include "Step_Reader.h"
 #include "Step_Writer.h"
 
-using Assembly_Builder = pooch::assembly::Assembly_Builder;
-using Assembly_Parser = pooch::assembly::Assembly_Parser;
-using Assembly_GraphBuilder = pooch::assembly::Assembly_GraphBuilder;
-using Assembly_TransformationVisitor = pooch::assembly::Assembly_TransformationVisitor;
+using Assembly_Builder = SAMOSBOR::assembly::Assembly_Builder;
+using Assembly_Parser = SAMOSBOR::assembly::Assembly_Parser;
+using Assembly_GraphBuilder = SAMOSBOR::assembly::Assembly_GraphBuilder;
+using Assembly_TransformationVisitor = SAMOSBOR::assembly::Assembly_TransformationVisitor;
 
-using Step_Reader = pooch::step::Step_Reader;
-using Step_Writer = pooch::step::Step_Writer;
+using Step_Reader = SAMOSBOR::step::Step_Reader;
+using Step_Writer = SAMOSBOR::step::Step_Writer;
 
 void Assembly_Builder::Build(const std::string& structureFile, const std::string& outputFile, float extensionLength) const
 {

@@ -4,7 +4,7 @@
 #include "pch.h"
 #include "InputOptions.h"
 
-using Assembly_Builder = pooch::assembly::Assembly_Builder;
+using Assembly_Builder = SAMOSBOR::assembly::Assembly_Builder;
 
 // Usage: 
 // pooch.exe --s assembly.json --o assembly.stp

@@ -2,7 +2,7 @@
 #include "Assembly_TransformationVisitor.h"
 
 using namespace std;
-using namespace pooch::assembly;
+using namespace SAMOSBOR::assembly;
 
 Assembly_TransformationVisitor::Assembly_TransformationVisitor(vector<shared_ptr<TopoDS_Shape>>* outShapes) : _outShapes(outShapes)
 {

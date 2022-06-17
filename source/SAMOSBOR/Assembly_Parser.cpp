@@ -3,7 +3,7 @@
 
 using namespace std;
 using namespace boost::uuids;
-using namespace pooch::assembly;
+using namespace SAMOSBOR::assembly;
 
 using boost::property_tree::ptree;
 

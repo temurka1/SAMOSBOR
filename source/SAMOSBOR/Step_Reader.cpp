@@ -2,7 +2,7 @@
 #include "Step_Reader.h"
 
 using namespace std;
-using namespace pooch::step;
+using namespace SAMOSBOR::step;
 
 Step_Data::Step_Data() : mcs(nullptr)
 {

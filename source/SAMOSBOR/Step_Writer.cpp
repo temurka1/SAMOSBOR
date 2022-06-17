@@ -2,7 +2,7 @@
 #include "Step_Writer.h"
 
 using namespace std;
-using namespace pooch::step;
+using namespace SAMOSBOR::step;
 
 void Step_Writer::Write(const string& filename, const vector<shared_ptr<TopoDS_Shape>>& data)
 {

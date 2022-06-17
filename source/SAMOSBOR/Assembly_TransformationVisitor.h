@@ -2,7 +2,7 @@
 
 #include "Assembly_GraphBuilder.h"
 
-namespace pooch::assembly
+namespace SAMOSBOR::assembly
 {
 	class Assembly_TransformationVisitor : public boost::default_dfs_visitor
 	{

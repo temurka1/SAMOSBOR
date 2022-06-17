@@ -5,8 +5,8 @@
 #include "Step_Reader.h"
 
 using namespace std;
-using namespace pooch::step;
-using namespace pooch::assembly;
+using namespace SAMOSBOR::step;
+using namespace SAMOSBOR::assembly;
 
 Assembly_Node::Assembly_Node()
 {

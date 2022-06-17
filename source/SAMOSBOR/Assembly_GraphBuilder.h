@@ -1,12 +1,12 @@
 #pragma once
 
-namespace pooch::step
+namespace SAMOSBOR::step
 {
 	class Step_Reader;
 	struct Step_Data;
 }
 
-namespace pooch::assembly
+namespace SAMOSBOR::assembly
 {
 	struct Assembly_ParsedItem;
 
@@ -37,13 +37,13 @@ namespace pooch::assembly
 	public:
 		AssemblyGraph Build(const std::vector<std::shared_ptr<Assembly_ParsedItem>>& parsedStructure, const float extensionLength);
 
-		Assembly_GraphBuilder(pooch::step::Step_Reader* stepReader);
+		Assembly_GraphBuilder(SAMOSBOR::step::Step_Reader* stepReader);
 		virtual ~Assembly_GraphBuilder();
 	private:
 		void BuildInternal(
 			AssemblyGraph& graph,
 			const vertex_t& rootNode,
-			const pooch::step::Step_Data& rootStepData,
+			const SAMOSBOR::step::Step_Data& rootStepData,
 			const std::shared_ptr<gp_Trsf>& rootTransform,
 			const std::shared_ptr<Assembly_ParsedItem>& root,
 			const std::vector<std::shared_ptr<Assembly_ParsedItem>>& parsed,
@@ -53,9 +53,9 @@ namespace pooch::assembly
 
 		std::vector<std::shared_ptr<Assembly_ParsedItem>> GetChildren(const std::shared_ptr<Assembly_ParsedItem>& parent, const std::vector<std::shared_ptr<Assembly_ParsedItem>>& parsed) const;
 
-		std::shared_ptr<std::map<std::string, Handle(Geom_Axis2Placement)>> GetCsws(const pooch::step::Step_Data& stepData) const;
+		std::shared_ptr<std::map<std::string, Handle(Geom_Axis2Placement)>> GetCsws(const SAMOSBOR::step::Step_Data& stepData) const;
 	private:
-		pooch::step::Step_Reader* _stepReader;
+		SAMOSBOR::step::Step_Reader* _stepReader;
 	};
 }
 

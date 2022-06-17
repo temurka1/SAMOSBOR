@@ -1,6 +1,6 @@
 #pragma once
 
-namespace pooch::assembly
+namespace SAMOSBOR::assembly
 {
 	struct Assembly_ParsedItem
 	{

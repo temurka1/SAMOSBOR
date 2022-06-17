@@ -1,6 +1,6 @@
 #pragma once
 
-namespace pooch::step
+namespace SAMOSBOR::step
 {
 	struct Step_Data
 	{
