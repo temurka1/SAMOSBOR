@@ -1,6 +1,10 @@
 #pragma once
 
-#include "Step_Reader.h"
+namespace pooch::step
+{
+	class Step_Reader;
+	struct Step_Data;
+}
 
 namespace pooch::assembly
 {
@@ -33,13 +37,13 @@ namespace pooch::assembly
 	public:
 		AssemblyGraph Build(const std::vector<std::shared_ptr<Assembly_ParsedItem>>& parsedStructure, const float extensionLength);
 
-		Assembly_GraphBuilder(const pooch::step::Step_Reader& stepReader);
+		Assembly_GraphBuilder(pooch::step::Step_Reader* stepReader);
 		virtual ~Assembly_GraphBuilder();
 	private:
 		void BuildInternal(
-			AssemblyGraph& graph, 
-			const vertex_t& rootNode, 
-			const pooch::step::Step_Data& rootStepData, 
+			AssemblyGraph& graph,
+			const vertex_t& rootNode,
+			const pooch::step::Step_Data& rootStepData,
 			const std::shared_ptr<gp_Trsf>& rootTransform,
 			const std::shared_ptr<Assembly_ParsedItem>& root,
 			const std::vector<std::shared_ptr<Assembly_ParsedItem>>& parsed,
@@ -51,7 +55,8 @@ namespace pooch::assembly
 
 		std::shared_ptr<std::map<std::string, Handle(Geom_Axis2Placement)>> GetCsws(const pooch::step::Step_Data& stepData) const;
 	private:
-		pooch::step::Step_Reader _stepReader;
+		pooch::step::Step_Reader* _stepReader;
 	};
 }
+
 

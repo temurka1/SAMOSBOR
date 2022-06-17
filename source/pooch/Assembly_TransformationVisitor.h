@@ -14,4 +14,3 @@ namespace pooch::assembly
 		std::vector<std::shared_ptr<TopoDS_Shape>>* _outShapes;
 	};
 }
-
