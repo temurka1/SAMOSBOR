@@ -40,7 +40,7 @@ namespace SAMOSBOR::core
 		{
 		}
 
-		const Result& Result() const 
+		const Result& Res() const 
 		{ 
 			return _result; 
 		}
@@ -62,7 +62,7 @@ namespace SAMOSBOR::core
 
 		bool Ok() const 
 		{ 
-			return _result.ok(); 
+			return _result.Ok(); 
 		}
 
 	private:
@@ -77,7 +77,7 @@ namespace SAMOSBOR::core
 	auto resultor = (expression);                                    \
 	if (!resultor.Ok())                                              \
 	{                                                                \
-		auto result = std::move(statusor.Result());                  \
+		auto result = std::move(statusor.Res());                  \
 		(void)result;                                                \
 		return error_expr;                                           \
 	}                                                                \

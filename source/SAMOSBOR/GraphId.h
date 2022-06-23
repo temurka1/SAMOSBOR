@@ -2,14 +2,31 @@
 
 namespace SAMOSBOR::assembly::ref
 {
-	/// <summary>
-	/// The graph id is a set of vertices and/or edges encoded in string
-    /// For more information about graph id design see https://github.com/temurka1/SAMOSBOR/issues/1
-	/// </summary>
 	struct GraphId
 	{
 	public:
-		GraphId(const std::wstring_view graphString);
+		struct Vertex
+		{
+			std::string_view fileId;
+			uint8_t index;
+			uint8_t toolType;
+		};
+
+		struct Edge
+		{
+			uint8_t from;
+			uint8_t to;
+		};
+
+		GraphId(const std::string graphString);
+
+		std::vector<Vertex> Vertices() const;
+		std::vector<Edge> Edges() const;
+	private:
+		std::vector<Vertex> _vertices;
+		std::vector<Edge> _edges;
+
+		std::string _graphString;
 	};
 }
 

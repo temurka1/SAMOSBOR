@@ -19,6 +19,9 @@
     <Filter Include="assembly\old">
       <UniqueIdentifier>{95616ddf-ae43-49ea-8800-60d5bb19b921}</UniqueIdentifier>
     </Filter>
+    <Filter Include="core\utils">
+      <UniqueIdentifier>{e39c292b-5326-42dd-9790-20ceba84fdea}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
@@ -57,6 +60,9 @@
     <ClInclude Include="Assembly_TransformationVisitor.h">
       <Filter>assembly\old</Filter>
     </ClInclude>
+    <ClInclude Include="StringUtils.h">
+      <Filter>core\utils</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -88,6 +94,9 @@
     </ClCompile>
     <ClCompile Include="Assembly_TransformationVisitor.cpp">
       <Filter>assembly\old</Filter>
+    </ClCompile>
+    <ClCompile Include="StringUtils.cpp">
+      <Filter>core\utils</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

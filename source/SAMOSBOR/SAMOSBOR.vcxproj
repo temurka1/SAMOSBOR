@@ -165,6 +165,7 @@
     <ClInclude Include="ResultOr.hpp" />
     <ClInclude Include="Step_Reader.h" />
     <ClInclude Include="Step_Writer.h" />
+    <ClInclude Include="StringUtils.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AssemblyGraph.cpp" />
@@ -182,6 +183,7 @@
     </ClCompile>
     <ClCompile Include="Step_Reader.cpp" />
     <ClCompile Include="Step_Writer.cpp" />
+    <ClCompile Include="StringUtils.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

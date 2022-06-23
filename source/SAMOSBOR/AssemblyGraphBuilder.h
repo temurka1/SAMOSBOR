@@ -16,8 +16,6 @@ namespace SAMOSBOR::assembly::ref
 	class AssemblyGraphBuilder final
 	{
 	public:
-		AssemblyGraph Build(const GraphId graphId, const float extensionLength);
-
 		AssemblyGraphBuilder();
 		~AssemblyGraphBuilder();
 	private:
