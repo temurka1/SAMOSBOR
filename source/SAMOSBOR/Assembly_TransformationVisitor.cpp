@@ -31,10 +31,6 @@ void Assembly_TransformationVisitor::finish_vertex(vertex_t v, const AssemblyGra
 
         if (source < v)
         {
-#ifdef _DEBUG
-            cout << "edge = source: " << source << " target: " << target << endl;
-#endif
-
             auto transform = graph[*ei].transform;
 
             TopLoc_Location loc(*transform);
