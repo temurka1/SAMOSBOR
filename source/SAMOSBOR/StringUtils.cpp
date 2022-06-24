@@ -3,7 +3,8 @@
 
 std::vector<std::string_view> SAMOSBOR::core::utils::str_split(const std::string_view str, const char delim, std::uint32_t maxTokens)
 {
-    std::vector<std::string_view> ret(maxTokens);
+    std::vector<std::string_view> ret;
+    ret.reserve(maxTokens);
 
     std::string_view::size_type start = 0;
     size_t pos = str.find_first_of(delim, start);
@@ -12,7 +13,8 @@ std::vector<std::string_view> SAMOSBOR::core::utils::str_split(const std::string
     {
         if (pos != start)
         {
-            ret.push_back(str.substr(start, pos - start));
+            std::string_view token = str.substr(start, pos - start);
+            ret.push_back(token);
         }
 
         start = pos + 1;
@@ -21,7 +23,8 @@ std::vector<std::string_view> SAMOSBOR::core::utils::str_split(const std::string
 
     if (start < str.length())
     {
-        ret.push_back(str.substr(start, str.length() - start));
+        std::string_view token = str.substr(start, str.length() - start);
+        ret.push_back(token);
     }
 
     ret.shrink_to_fit();
@@ -33,6 +36,7 @@ void SAMOSBOR::core::utils::str_split_inplace(const std::string_view str, const 
 {
     std::string_view::size_type start = 0;
     size_t pos = str.find_first_of(delim, start);
+    size_t i = 0;
 
     while (pos != std::string_view::npos)
     {

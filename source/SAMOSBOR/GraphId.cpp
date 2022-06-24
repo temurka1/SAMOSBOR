@@ -45,26 +45,28 @@ namespace
 
 	std::vector<GraphId::Vertex> build_vertex_list(const std::string_view graphString, const core::ResultOr<size_t>& hasEdges)
 	{
-		std::string_view vertexStr = graphString.substr(0, hasEdges.Ok() ? hasEdges.Value() - 1 : graphString.size());
+		std::string_view vertexStr = graphString.substr(0, hasEdges.Ok() ? hasEdges.Value() : graphString.size());
 		std::vector<std::string_view> vertexTokens = utils::str_split(vertexStr, VERTEX_SEPARATOR);
 
 		std::vector<GraphId::Vertex> vertexList(vertexTokens.size());
-		std::vector<std::string_view> vertexComponents(2);
+		std::vector<std::string_view> vertexComponents;
+
+		vertexComponents.reserve(2);
 
 		for (size_t i = 0; i < vertexTokens.size(); ++i)
 		{
 			utils::str_split_inplace(vertexTokens[i], FILE_ID_SEPARATOR, &vertexComponents);
 
 			std::string_view fileIdStr = vertexComponents[0];
-			std::string_view indexStr = vertexComponents[1].substr(0, vertexComponents[i].size() - 1);
-			std::string_view toolTypeStr = vertexComponents[1].substr(vertexComponents[i].size() - 1, 1);
+			std::string_view indexStr = vertexComponents[1].substr(0, vertexComponents[1].size() - 1);
+			std::string_view toolTypeStr = vertexComponents[1].substr(vertexComponents[1].size() - 1, 1);
 
 			uint8_t index;
 			std::from_chars(indexStr.data(), indexStr.data() + indexStr.size(), index);
 
 			uint8_t toolType = string_to_tooltype(toolTypeStr);
 
-			vertexList.push_back(GraphId::Vertex{ .fileId = vertexComponents[0], .index = index, .toolType = toolType });
+			vertexList[i] = GraphId::Vertex{ .fileId = vertexComponents[0], .index = index, .toolType = toolType };
 
 			vertexComponents.clear();
 		}
@@ -79,11 +81,13 @@ namespace
 			return std::vector<GraphId::Edge>();
 		}
 
-		std::string_view edgeStr = graphString.substr(hasEdges.Value(), graphString.size() - hasEdges.Value());
+		std::string_view edgeStr = graphString.substr(hasEdges.Value() + 1, graphString.size() - hasEdges.Value());
 		std::vector<std::string_view> edgeTokens = utils::str_split(edgeStr, VERTEX_SEPARATOR);
 
 		std::vector<GraphId::Edge> edgeList(edgeTokens.size());
-		std::vector<std::string_view> edgeComponents(2);
+		std::vector<std::string_view> edgeComponents;
+
+		edgeComponents.reserve(2);
 
 		for (size_t i = 0; i < edgeTokens.size(); ++i)
 		{
@@ -95,7 +99,7 @@ namespace
 			uint8_t second;
 			std::from_chars(edgeComponents[1].data(), edgeComponents[1].data() + edgeComponents[1].size(), second);
 
-			edgeList.push_back(GraphId::Edge { .from = first, .to = second });
+			edgeList[i] = GraphId::Edge { .from = first, .to = second };
 
 			edgeComponents.clear();
 		}
