@@ -1,9 +1,7 @@
 #include "pch.h"
 #include "StringUtils.h"
 
-using namespace SAMOSBOR::core::utils;
-
-std::vector<std::string_view> str_split(std::string_view str, const char delim, std::uint32_t maxTokens)
+std::vector<std::string_view> SAMOSBOR::core::utils::str_split(const std::string_view str, const char delim, std::uint32_t maxTokens)
 {
     std::vector<std::string_view> ret(maxTokens);
 
@@ -31,7 +29,7 @@ std::vector<std::string_view> str_split(std::string_view str, const char delim, 
     return ret;
 }
 
-void str_split_inplace(std::string_view str, const char delim, std::vector<std::string_view>* tokens)
+void SAMOSBOR::core::utils::str_split_inplace(const std::string_view str, const char delim, std::vector<std::string_view>* tokens)
 {
     std::string_view::size_type start = 0;
     size_t pos = str.find_first_of(delim, start);

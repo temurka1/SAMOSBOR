@@ -26,6 +26,23 @@ namespace
 		return core::ResultOr<size_t>(edgesStart != std::string::npos ? core::Result::OK : core::Result::NOT_OK, edgesStart);
 	}
 
+	uint8_t string_to_tooltype(const std::string_view str)
+	{
+		switch (str.data()[0])
+		{
+			case 'a':
+				return 1;
+			case 'h':
+				return 2;
+			case 't':
+				return 3;
+			case 'i':
+				return 4;
+		}
+
+		return 0;
+	}
+
 	std::vector<GraphId::Vertex> build_vertex_list(const std::string_view graphString, const core::ResultOr<size_t>& hasEdges)
 	{
 		std::string_view vertexStr = graphString.substr(0, hasEdges.Ok() ? hasEdges.Value() - 1 : graphString.size());
@@ -45,8 +62,7 @@ namespace
 			uint8_t index;
 			std::from_chars(indexStr.data(), indexStr.data() + indexStr.size(), index);
 
-			uint8_t toolType;
-			std::from_chars(toolTypeStr.data(), toolTypeStr.data() + toolTypeStr.size(), toolType);
+			uint8_t toolType = string_to_tooltype(toolTypeStr);
 
 			vertexList.push_back(GraphId::Vertex{ .fileId = vertexComponents[0], .index = index, .toolType = toolType });
 
