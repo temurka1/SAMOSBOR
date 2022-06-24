@@ -4,3 +4,9 @@
 [submodule "thirdparty/indicators"]
 	path = thirdparty/indicators
 	url = https://github.com/p-ranav/indicators.git
+[submodule "thirdparty/opencascade"]
+	path = thirdparty/opencascade
+	url = https://github.com/predeps/opencascade
+[submodule "thirdparty/googletest"]
+	path = thirdparty/googletest
+	url = https://github.com/predeps/googletest
