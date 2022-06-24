@@ -2,13 +2,11 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="InputOptions.cpp" />
     <ClCompile Include="pch.cpp">
       <Filter>pch</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="InputOptions.h" />
     <ClInclude Include="pch.h">
       <Filter>pch</Filter>
     </ClInclude>

@@ -27,7 +27,9 @@
 #include <gp_Ax3.hxx>
 
 #include <vector>
+#include <map>
 #include <string>
+#include <charconv>
 
 #include <boost/foreach.hpp>
 #include <boost/uuid/uuid.hpp>
