@@ -1,17 +1,26 @@
 #pragma once
-#include "GraphId.h"
+
+#include "CoordinateSystem.hpp"
+#include "Csw.hpp"
+
+using Csw = SAMOSBOR::assembly::csys::Csw;
+using CoordinateSystem = SAMOSBOR::assembly::csys::CoordinateSystem;
 
 namespace SAMOSBOR::assembly::ref
 {
 	/// <summary>
-	/// Represents tool items assembly graph in cache friendly way
+	/// Represents tool items assembly graph
 	/// </summary>
 	struct AssemblyGraph
 	{
-		GraphId graphId;
-
 		std::vector<uint16_t> hierarchy;
-		std::vector<gp_Trsf> transforms;
+		
+		std::vector<Shape> shapes;
+		std::vector<Transform> transforms;
+
+		std::vector<CoordinateSystem> pcs;
+		std::vector<CoordinateSystem> mcs;
+		std::vector<Csw> csw;
 	};
 }
 

@@ -12,3 +12,13 @@ TEST(GraphIdParsingTests, SimpleParsingCase)
 	EXPECT_EQ(3, graphId.Vertices().size());
 	EXPECT_EQ(2, graphId.Edges().size());
 }
+
+TEST(GraphIdParsingTests, ParseNoEdges)
+{
+	std::string graphStr("holder001_0h");
+
+	GraphId graphId(graphStr);
+
+	EXPECT_EQ(1, graphId.Vertices().size());
+	EXPECT_EQ(0, graphId.Edges().size());
+}

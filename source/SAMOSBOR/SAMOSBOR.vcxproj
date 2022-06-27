@@ -167,6 +167,8 @@
     <ClInclude Include="Assembly_GraphBuilder.h" />
     <ClInclude Include="Assembly_Parser.h" />
     <ClInclude Include="Assembly_TransformationVisitor.h" />
+    <ClInclude Include="CoordinateSystem.hpp" />
+    <ClInclude Include="Csw.hpp" />
     <ClInclude Include="GraphId.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Result.hpp" />

@@ -2,6 +2,11 @@
 
 namespace SAMOSBOR::assembly::ref
 {
+	/// <summary>
+	/// The graph id is a set of vertices and/or edges encoded in string. 
+	/// Used to represent structure of tool assembly in short and clear way.
+	/// For more info take a look at https://github.com/temurka1/SAMOSBOR/issues/1
+	/// </summary>
 	struct GraphId
 	{
 	public:
