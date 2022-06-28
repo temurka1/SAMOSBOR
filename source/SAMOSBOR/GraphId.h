@@ -23,10 +23,10 @@ namespace SAMOSBOR::assembly::ref
 			uint8_t to;
 		};
 
-		GraphId(const std::string graphString);
+		[[nodiscard]] const std::vector<Vertex>& Vertices() const;
+		[[nodiscard]] const std::vector<Edge>& Edges() const;
 
-		std::vector<Vertex> Vertices() const;
-		std::vector<Edge> Edges() const;
+		GraphId(const std::string graphString);
 	private:
 		std::vector<Vertex> _vertices;
 		std::vector<Edge> _edges;

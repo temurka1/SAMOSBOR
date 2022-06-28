@@ -1,12 +1,17 @@
 #pragma once
 
-#include "CoordinateSystem.hpp"
+#include "CoordinateSystem.h"
 
-namespace SAMOSBOR::assembly::csys
+namespace SAMOSBOR::core::occ
 {
+	constexpr uint8_t MAX_CSW_COUNT = 24;
+
+	/// <summary>
+	/// Coordinate system workpiece-side
+	/// </summary>
 	struct Csw
 	{
-		std::array<CoordinateSystem, 64> cs;
+		std::array<CoordinateSystem, MAX_CSW_COUNT> cs;
 		uint8_t count;
 	};
 }

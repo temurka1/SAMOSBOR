@@ -28,8 +28,8 @@
     <Filter Include="step\ref">
       <UniqueIdentifier>{ca44c07c-4447-406c-b5b6-7ae91635b5a8}</UniqueIdentifier>
     </Filter>
-    <Filter Include="assembly\csys">
-      <UniqueIdentifier>{361ea5f4-b021-48d2-810e-f51657a0586c}</UniqueIdentifier>
+    <Filter Include="core\occ">
+      <UniqueIdentifier>{fb118bdd-cf72-4080-9191-134be998643b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -72,11 +72,17 @@
     <ClInclude Include="Step_Writer.h">
       <Filter>step\old</Filter>
     </ClInclude>
-    <ClInclude Include="CoordinateSystem.hpp">
-      <Filter>assembly\csys</Filter>
+    <ClInclude Include="Transform.h">
+      <Filter>core\occ</Filter>
+    </ClInclude>
+    <ClInclude Include="Shape.h">
+      <Filter>core\occ</Filter>
+    </ClInclude>
+    <ClInclude Include="CoordinateSystem.h">
+      <Filter>core\occ</Filter>
     </ClInclude>
     <ClInclude Include="Csw.hpp">
-      <Filter>assembly\csys</Filter>
+      <Filter>core\occ</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -112,6 +118,15 @@
     </ClCompile>
     <ClCompile Include="Step_Writer.cpp">
       <Filter>step\old</Filter>
+    </ClCompile>
+    <ClCompile Include="Shape.cpp">
+      <Filter>core\occ</Filter>
+    </ClCompile>
+    <ClCompile Include="Transform.cpp">
+      <Filter>core\occ</Filter>
+    </ClCompile>
+    <ClCompile Include="CoordinateSystem.cpp">
+      <Filter>core\occ</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

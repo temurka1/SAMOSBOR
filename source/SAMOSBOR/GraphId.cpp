@@ -116,12 +116,12 @@ GraphId::GraphId(const std::string graphString) : _graphString(graphString)
 	_edges = build_edge_list(_graphString, hasEdges);
 }
 
-std::vector<GraphId::Vertex> GraphId::Vertices() const
+const std::vector<GraphId::Vertex>& GraphId::Vertices() const
 {
 	return _vertices;
 }
 
-std::vector<GraphId::Edge> GraphId::Edges() const
+const std::vector<GraphId::Edge>& GraphId::Edges() const
 {
 	return _edges;
 }

@@ -167,15 +167,17 @@
     <ClInclude Include="Assembly_GraphBuilder.h" />
     <ClInclude Include="Assembly_Parser.h" />
     <ClInclude Include="Assembly_TransformationVisitor.h" />
-    <ClInclude Include="CoordinateSystem.hpp" />
+    <ClInclude Include="CoordinateSystem.h" />
     <ClInclude Include="Csw.hpp" />
     <ClInclude Include="GraphId.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Result.hpp" />
     <ClInclude Include="ResultOr.hpp" />
+    <ClInclude Include="Shape.h" />
     <ClInclude Include="Step_Reader.h" />
     <ClInclude Include="Step_Writer.h" />
     <ClInclude Include="StringUtils.h" />
+    <ClInclude Include="Transform.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AssemblyGraph.cpp" />
@@ -184,6 +186,7 @@
     <ClCompile Include="Assembly_GraphBuilder.cpp" />
     <ClCompile Include="Assembly_Parser.cpp" />
     <ClCompile Include="Assembly_TransformationVisitor.cpp" />
+    <ClCompile Include="CoordinateSystem.cpp" />
     <ClCompile Include="GraphId.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
@@ -191,9 +194,11 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="Shape.cpp" />
     <ClCompile Include="Step_Reader.cpp" />
     <ClCompile Include="Step_Writer.cpp" />
     <ClCompile Include="StringUtils.cpp" />
+    <ClCompile Include="Transform.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

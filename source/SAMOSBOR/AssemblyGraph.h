@@ -1,10 +1,14 @@
 #pragma once
 
-#include "CoordinateSystem.hpp"
+#include "Shape.h"
+#include "Transform.h"
+#include "CoordinateSystem.h"
 #include "Csw.hpp"
 
-using Csw = SAMOSBOR::assembly::csys::Csw;
-using CoordinateSystem = SAMOSBOR::assembly::csys::CoordinateSystem;
+using Csw = SAMOSBOR::core::occ::Csw;
+using Shape = SAMOSBOR::core::occ::Shape;
+using Transform = SAMOSBOR::core::occ::Transform;
+using CoordinateSystem = SAMOSBOR::core::occ::CoordinateSystem;
 
 namespace SAMOSBOR::assembly::ref
 {
