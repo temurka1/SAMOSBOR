@@ -84,6 +84,9 @@
     <ClInclude Include="Csw.hpp">
       <Filter>core\occ</Filter>
     </ClInclude>
+    <ClInclude Include="StepReader.h">
+      <Filter>step\ref</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -127,6 +130,9 @@
     </ClCompile>
     <ClCompile Include="CoordinateSystem.cpp">
       <Filter>core\occ</Filter>
+    </ClCompile>
+    <ClCompile Include="StepReader.cpp">
+      <Filter>step\ref</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

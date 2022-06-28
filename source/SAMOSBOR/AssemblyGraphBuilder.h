@@ -1,8 +1,8 @@
 #pragma once
 
-namespace SAMOSBOR::step
+namespace SAMOSBOR::step::ref
 {
-	class Step_Reader;
+	class StepReader;
 }
 
 namespace SAMOSBOR::assembly::ref
@@ -26,7 +26,7 @@ namespace SAMOSBOR::assembly::ref
 		AssemblyGraphBuilder();
 		~AssemblyGraphBuilder();
 	private:
-		step::Step_Reader* _reader;
+		step::ref::StepReader* _reader;
 	};
 }
 
