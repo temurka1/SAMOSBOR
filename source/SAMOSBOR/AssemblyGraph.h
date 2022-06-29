@@ -1,8 +1,8 @@
 #pragma once
 
-#include "Shape.h"
 #include "Transform.h"
 #include "CoordinateSystem.h"
+#include "Shape.hpp"
 #include "Csw.hpp"
 
 using Csw = SAMOSBOR::core::occ::Csw;

@@ -19,6 +19,7 @@
 #include <TCollection_HAsciiString.hxx>
 #include <Standard_Handle.hxx>
 #include <Interface_Static.hxx>
+#include <Interface_EntityIterator.hxx>
 #include <Geom_Axis2Placement.hxx>
 #include <StepToGeom.hxx>
 #include <BRepBuilderAPI_Copy.hxx>
@@ -26,11 +27,14 @@
 #include <gp_Pnt2d.hxx>
 #include <gp_Ax3.hxx>
 
+#include <array>
 #include <vector>
 #include <map>
+#include <unordered_map>
 #include <string>
 #include <string_view>
 #include <charconv>
+#include <filesystem>
 
 #include <boost/foreach.hpp>
 #include <boost/uuid/uuid.hpp>

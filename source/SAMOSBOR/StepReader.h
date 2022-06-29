@@ -1,24 +1,55 @@
 #pragma once
-#include "ResultOr.hpp"
+#include "Shape.hpp"
+#include "CoordinateSystem.h"
+
+class STEPControl_Reader;
+
+namespace std::filesystem
+{
+	class path;
+}
+
+namespace SAMOSBOR::core
+{
+	template<class T> class ResultOr;
+}
+
+namespace SAMOSBOR::core::occ
+{
+	struct Csw;	
+}
 
 namespace SAMOSBOR::step::ref
 {
+	namespace core = SAMOSBOR::core;
+
 	/// <summary>
-	/// 
+	/// Data contained in STEP file
 	/// </summary>
-	struct StepFileData
+	struct StepData
 	{
 	public:
-		StepFileData(const STEPControl_Reader& reader);
+		StepData() = default;
+		StepData(const STEPControl_Reader& reader);
+		StepData(const StepData& other);
+
+		core::occ::Shape Shape() const;
+
+		core::occ::CoordinateSystem Pcs() const;
+		core::occ::CoordinateSystem Mcs() const;
+
+		core::occ::Csw Csw() const;
 	private:
-		STEPControl_Reader _reader;
+		std::unordered_map<std::string, core::occ::CoordinateSystem> _csmap;
+		core::occ::Shape _shape;
 	};
 
 	/// <summary>
-	/// 
+	/// Reads STEP file
 	/// </summary>
-	struct StepReader
+	class StepReader
 	{
-	 	core::ResultOr<StepFileData> Read(const std::string& filename);
+	public:
+		core::ResultOr<StepData> Read(const std::filesystem::path& filepath, bool printCheckload = false);
 	};
 }

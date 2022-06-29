@@ -75,7 +75,7 @@
     <ClInclude Include="Transform.h">
       <Filter>core\occ</Filter>
     </ClInclude>
-    <ClInclude Include="Shape.h">
+    <ClInclude Include="Shape.hpp">
       <Filter>core\occ</Filter>
     </ClInclude>
     <ClInclude Include="CoordinateSystem.h">
@@ -121,9 +121,6 @@
     </ClCompile>
     <ClCompile Include="Step_Writer.cpp">
       <Filter>step\old</Filter>
-    </ClCompile>
-    <ClCompile Include="Shape.cpp">
-      <Filter>core\occ</Filter>
     </ClCompile>
     <ClCompile Include="Transform.cpp">
       <Filter>core\occ</Filter>

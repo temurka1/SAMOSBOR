@@ -113,7 +113,7 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>C:\boost_1_79_0;$(SolutionDir)..\thirdparty\opencascade\inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\boost_1_79_0;$(SolutionDir)..\thirdparty\opencascade\inc;$(SolutionDir)..\thirdparty\googletest\inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
@@ -141,7 +141,7 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>C:\boost_1_79_0;$(SolutionDir)..\thirdparty\opencascade\inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\boost_1_79_0;$(SolutionDir)..\thirdparty\opencascade\inc;$(SolutionDir)..\thirdparty\googletest\inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -173,7 +173,7 @@
     <ClInclude Include="pch.h" />
     <ClInclude Include="Result.hpp" />
     <ClInclude Include="ResultOr.hpp" />
-    <ClInclude Include="Shape.h" />
+    <ClInclude Include="Shape.hpp" />
     <ClInclude Include="StepReader.h" />
     <ClInclude Include="Step_Reader.h" />
     <ClInclude Include="Step_Writer.h" />
@@ -195,7 +195,6 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="Shape.cpp" />
     <ClCompile Include="StepReader.cpp" />
     <ClCompile Include="Step_Reader.cpp" />
     <ClCompile Include="Step_Writer.cpp" />

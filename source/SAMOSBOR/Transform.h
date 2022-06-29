@@ -1,4 +1,6 @@
 #pragma once
+#include <string>
+#include <gp_Trsf.hxx>
 
 namespace SAMOSBOR::core::occ
 {

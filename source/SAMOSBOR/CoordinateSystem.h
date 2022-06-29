@@ -12,13 +12,21 @@ namespace SAMOSBOR::core::occ
 		/// <summary>
 		/// Computes transformation between this CS and another CS
 		/// </summary>
-		Transform GetTransformTo(const CoordinateSystem& cs) const;
+		Transform TransformTo(const CoordinateSystem& cs) const;
 
-		CoordinateSystem() = default;
-		CoordinateSystem(const Transform& transform);
-
+		/// <summary>
+		/// Origin
+		/// </summary>
 		gp_Vec origin;
+
+		/// <summary>
+		/// Z axis
+		/// </summary>
 		gp_Vec uAxis;
+
+		/// <summary>
+		/// X axis
+		/// </summary>
 		gp_Vec vAxis;
 	};
 }

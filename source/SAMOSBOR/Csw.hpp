@@ -1,5 +1,5 @@
 #pragma once
-
+#include <array>
 #include "CoordinateSystem.h"
 
 namespace SAMOSBOR::core::occ
