@@ -10,11 +10,6 @@ namespace SAMOSBOR::core::occ
 	struct CoordinateSystem
 	{
 		/// <summary>
-		/// Computes transformation between this CS and another CS
-		/// </summary>
-		Transform TransformTo(const CoordinateSystem& cs) const;
-
-		/// <summary>
 		/// Origin
 		/// </summary>
 		gp_Vec origin;
@@ -29,4 +24,9 @@ namespace SAMOSBOR::core::occ
 		/// </summary>
 		gp_Vec vAxis;
 	};
+
+	/// <summary>
+	/// Computes transformation between coordinate systems
+	/// </summary>
+	Transform GetTransform(const CoordinateSystem& first, const CoordinateSystem& second);
 }

@@ -5,10 +5,17 @@ namespace SAMOSBOR::step::ref
 	class StepReader;
 }
 
+namespace SAMOSBOR::core
+{
+	template<class T> class ResultOr;
+}
+
 namespace SAMOSBOR::assembly::ref
 {
-	struct AssemblyGraph;
+	namespace core = SAMOSBOR::core;
+
 	struct GraphId;
+	struct AssemblyGraph;
 
 	struct AssemblyGraphSettings
 	{
@@ -21,7 +28,7 @@ namespace SAMOSBOR::assembly::ref
 	class AssemblyGraphBuilder final
 	{
 	public:
-		AssemblyGraph Build(const GraphId& graphId, const AssemblyGraphSettings& graphSettings);
+		core::ResultOr<AssemblyGraph> Build(const GraphId& graphId, const AssemblyGraphSettings& graphSettings);
 
 		AssemblyGraphBuilder();
 		~AssemblyGraphBuilder();

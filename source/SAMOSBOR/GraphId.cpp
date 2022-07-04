@@ -20,6 +20,8 @@ namespace
 	inline constexpr char ADAPTER_CODE = 'a';
 	inline constexpr char TURNING_CODE = 't';
 
+	inline constexpr size_t EDGE_COMPONENTS_COUNT = 3;
+
 	core::ResultOr<size_t> has_edges(const std::string_view graphString)
 	{
 		const size_t edgesStart = graphString.find(GRAPH_SEPARATOR);
@@ -87,19 +89,21 @@ namespace
 		std::vector<GraphId::Edge> edgeList(edgeTokens.size());
 		std::vector<std::string_view> edgeComponents;
 
-		edgeComponents.reserve(2);
+		edgeComponents.reserve(EDGE_COMPONENTS_COUNT);
 
 		for (size_t i = 0; i < edgeTokens.size(); ++i)
 		{
 			utils::str_split_inplace(edgeTokens[i], EDGE_SEPARATOR, &edgeComponents);
 
-			uint8_t first;
-			std::from_chars(edgeComponents[0].data(), edgeComponents[0].data() + edgeComponents[0].size(), first);
+			uint8_t from;
+			std::from_chars(edgeComponents[0].data(), edgeComponents[0].data() + edgeComponents[0].size(), from);
 
-			uint8_t second;
-			std::from_chars(edgeComponents[1].data(), edgeComponents[1].data() + edgeComponents[1].size(), second);
+			uint8_t to;
+			std::from_chars(edgeComponents[1].data(), edgeComponents[1].data() + edgeComponents[1].size(), to);
 
-			edgeList[i] = GraphId::Edge { .from = first, .to = second };
+			// TODO: csw port mapping
+
+			edgeList[i] = GraphId::Edge { .from = from, .to = to, .port = port };
 
 			edgeComponents.clear();
 		}
@@ -108,12 +112,12 @@ namespace
 	}
 }
 
-GraphId::GraphId(const std::string graphString) : _graphString(graphString)
+GraphId::GraphId(const std::string_view graphString)
 {
 	const core::ResultOr<size_t> hasEdges = has_edges(graphString);
 
-	_vertices = build_vertex_list(_graphString, hasEdges);
-	_edges = build_edge_list(_graphString, hasEdges);
+	_vertices = build_vertex_list(graphString, hasEdges);
+	_edges = build_edge_list(graphString, hasEdges);
 }
 
 const std::vector<GraphId::Vertex>& GraphId::Vertices() const

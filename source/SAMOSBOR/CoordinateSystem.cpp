@@ -7,21 +7,19 @@ using CoordinateSystem = SAMOSBOR::core::occ::CoordinateSystem;
 
 namespace
 {
-	void set(gp_Vec& dest, const gp_XYZ& value)
-	{
-		dest.SetCoord(value.X(), value.Y(), value.Z());
-	}
-
 	gp_Ax3 toAx3(const CoordinateSystem& cs)
 	{
 		return gp_Ax3(gp_Pnt(cs.origin.XYZ()), gp_Dir(cs.uAxis), gp_Dir(cs.vAxis));
 	}
 }
 
-Transform CoordinateSystem::TransformTo(const CoordinateSystem& cs) const
+namespace SAMOSBOR::core::occ
 {
-	gp_Trsf trsf;
-	trsf.SetTransformation(toAx3(*this), toAx3(cs));
+	Transform GetTransform(const CoordinateSystem& first, const CoordinateSystem& second)
+	{
+		gp_Trsf trsf;
+		trsf.SetTransformation(toAx3(first), toAx3(second));
 
-	return Transform(trsf);
+		return Transform(trsf);
+	}
 }

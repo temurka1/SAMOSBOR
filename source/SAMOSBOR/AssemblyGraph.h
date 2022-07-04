@@ -17,6 +17,9 @@ namespace SAMOSBOR::assembly::ref
 	/// </summary>
 	struct AssemblyGraph
 	{
+		/// <summary>
+		/// Stores parent indicies, i.e. parent_of_i = hierarchy[i]
+		/// </summary>
 		std::vector<uint16_t> hierarchy;
 		
 		std::vector<Shape> shapes;
@@ -25,6 +28,9 @@ namespace SAMOSBOR::assembly::ref
 		std::vector<CoordinateSystem> pcs;
 		std::vector<CoordinateSystem> mcs;
 		std::vector<Csw> csw;
+
+		AssemblyGraph() = default;
+		AssemblyGraph(const size_t toolItemsCount);
 	};
 }
 

@@ -113,7 +113,7 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>C:\boost_1_79_0;$(SolutionDir)..\thirdparty\opencascade\inc;$(SolutionDir)..\thirdparty\googletest\inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\boost_1_79_0;$(SolutionDir)..\thirdparty\opencascade\inc;$(SolutionDir)..\thirdparty\slot_map;$(SolutionDir)..\thirdparty\googletest\inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
@@ -141,7 +141,7 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>C:\boost_1_79_0;$(SolutionDir)..\thirdparty\opencascade\inc;$(SolutionDir)..\thirdparty\googletest\inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\boost_1_79_0;$(SolutionDir)..\thirdparty\opencascade\inc;$(SolutionDir)..\thirdparty\slot_map;$(SolutionDir)..\thirdparty\googletest\inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -174,6 +174,7 @@
     <ClInclude Include="Result.hpp" />
     <ClInclude Include="ResultOr.hpp" />
     <ClInclude Include="Shape.hpp" />
+    <ClInclude Include="StepData.h" />
     <ClInclude Include="StepReader.h" />
     <ClInclude Include="Step_Reader.h" />
     <ClInclude Include="Step_Writer.h" />
@@ -188,6 +189,7 @@
     <ClCompile Include="Assembly_Parser.cpp" />
     <ClCompile Include="Assembly_TransformationVisitor.cpp" />
     <ClCompile Include="CoordinateSystem.cpp" />
+    <ClCompile Include="Csw.cpp" />
     <ClCompile Include="GraphId.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
@@ -195,6 +197,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="StepData.cpp" />
     <ClCompile Include="StepReader.cpp" />
     <ClCompile Include="Step_Reader.cpp" />
     <ClCompile Include="Step_Writer.cpp" />

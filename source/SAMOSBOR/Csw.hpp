@@ -1,17 +1,21 @@
 #pragma once
-#include <array>
+#include <slot_map/slot_map.h>
 #include "CoordinateSystem.h"
 
 namespace SAMOSBOR::core::occ
 {
-	constexpr uint8_t MAX_CSW_COUNT = 24;
-
 	/// <summary>
 	/// Coordinate system workpiece-side
 	/// </summary>
 	struct Csw
 	{
-		std::array<CoordinateSystem, MAX_CSW_COUNT> cs;
-		uint8_t count;
+		typedef dod::slot_map_key64<CoordinateSystem> Key;
+		typedef dod::slot_map <CoordinateSystem, Key> Map;
+
+		typedef Key::tag_t Port;
+		typedef std::unordered_map<Port, Key> PortMap;
+
+		Map cs;
+		PortMap ports;
 	};
 }

@@ -3,5 +3,6 @@
   <ItemGroup>
     <ClCompile Include="GraphIdTests.cpp" />
     <ClCompile Include="StepReaderTests.cpp" />
+    <ClCompile Include="AssemblyGraphBuilderTests.cpp" />
   </ItemGroup>
 </Project>

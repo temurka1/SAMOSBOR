@@ -81,5 +81,5 @@ namespace SAMOSBOR::core
 		(void)result;                                                \
 		return error_expr;                                           \
 	}                                                                \
-	lhs = std::move(resultor).value();
+	lhs = std::move(resultor).Value();
 }

@@ -21,17 +21,16 @@ namespace SAMOSBOR::assembly::ref
 		{
 			uint8_t from;
 			uint8_t to;
+			uint8_t port;
 		};
 
 		[[nodiscard]] const std::vector<Vertex>& Vertices() const;
 		[[nodiscard]] const std::vector<Edge>& Edges() const;
 
-		GraphId(const std::string graphString);
+		GraphId(const std::string_view graphString);
 	private:
 		std::vector<Vertex> _vertices;
 		std::vector<Edge> _edges;
-
-		std::string _graphString;
 	};
 }
 
