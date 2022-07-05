@@ -1,9 +1,5 @@
 #pragma once
-
-namespace std::filesystem
-{
-	class path;
-}
+#include <filesystem>
 
 namespace SAMOSBOR::core
 {

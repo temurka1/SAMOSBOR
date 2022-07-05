@@ -57,7 +57,6 @@ int main(int argc, char* argv[])
 
 		Assembly_Builder assemblyBuilder;
 		assemblyBuilder.Build(program.get<std::string>("--s"), program.get<std::string>("--o"), program.get<float>("--l"));
-
 	}
 	catch (std::runtime_error ex)
 	{

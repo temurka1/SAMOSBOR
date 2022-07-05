@@ -137,6 +137,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AssemblyBuilderTests.cpp" />
     <ClCompile Include="AssemblyGraphBuilderTests.cpp" />
     <ClCompile Include="GraphIdTests.cpp" />
     <ClCompile Include="StepReaderTests.cpp" />

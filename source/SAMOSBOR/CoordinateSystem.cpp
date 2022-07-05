@@ -18,7 +18,7 @@ namespace SAMOSBOR::core::occ
 	Transform GetTransform(const CoordinateSystem& first, const CoordinateSystem& second)
 	{
 		gp_Trsf trsf;
-		trsf.SetTransformation(toAx3(first), toAx3(second));
+		trsf.SetDisplacement(toAx3(first), toAx3(second));
 
 		return Transform(trsf);
 	}

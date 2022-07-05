@@ -71,15 +71,18 @@ namespace SAMOSBOR::core
 	};
 
 #define ASSIGN_OR_RETURN(lhs, expression) \
-	ASSIGN_OR_RETURN_IMPL(DRACO_MACROS_IMPL_CONCAT_(_statusor, __LINE__), lhs, expression, _status)
+	auto resultor = expression;           \
+	if (!resultor.Ok())                   \
+	{                                     \
+		return resultor.Res();            \
+	}                                     \
+	lhs = resultor.Value();
 
-#define ASSIGN_OR_RETURN_IMPL(statusor, lhs, expression, error_expr) \
-	auto resultor = (expression);                                    \
-	if (!resultor.Ok())                                              \
-	{                                                                \
-		auto result = std::move(statusor.Res());                  \
-		(void)result;                                                \
-		return error_expr;                                           \
-	}                                                                \
-	lhs = std::move(resultor).Value();
+#define ASSIGN_OR_RETURN_T(lhs, expression, T)               \
+	auto resultor = expression;                              \
+	if (!resultor.Ok())                                      \
+	{                                                        \
+		return SAMOSBOR::core::ResultOr<T>(resultor.Res());  \
+	}                                                        \
+	lhs = resultor.Value();
 }

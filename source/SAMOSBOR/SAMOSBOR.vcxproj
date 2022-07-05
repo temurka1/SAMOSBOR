@@ -161,8 +161,10 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="AssemblyBuilder.h" />
     <ClInclude Include="AssemblyGraph.h" />
     <ClInclude Include="AssemblyGraphBuilder.h" />
+    <ClInclude Include="AssemblySettings.hpp" />
     <ClInclude Include="Assembly_Builder.h" />
     <ClInclude Include="Assembly_GraphBuilder.h" />
     <ClInclude Include="Assembly_Parser.h" />
@@ -173,15 +175,18 @@
     <ClInclude Include="pch.h" />
     <ClInclude Include="Result.hpp" />
     <ClInclude Include="ResultOr.hpp" />
+    <ClInclude Include="SAMOSBOR.h" />
     <ClInclude Include="Shape.hpp" />
     <ClInclude Include="StepData.h" />
     <ClInclude Include="StepReader.h" />
+    <ClInclude Include="StepWriter.h" />
     <ClInclude Include="Step_Reader.h" />
     <ClInclude Include="Step_Writer.h" />
     <ClInclude Include="StringUtils.h" />
     <ClInclude Include="Transform.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AssemblyBuilder.cpp" />
     <ClCompile Include="AssemblyGraph.cpp" />
     <ClCompile Include="AssemblyGraphBuilder.cpp" />
     <ClCompile Include="Assembly_Builder.cpp" />
@@ -198,6 +203,7 @@
     </ClCompile>
     <ClCompile Include="StepData.cpp" />
     <ClCompile Include="StepReader.cpp" />
+    <ClCompile Include="StepWriter.cpp" />
     <ClCompile Include="Step_Reader.cpp" />
     <ClCompile Include="Step_Writer.cpp" />
     <ClCompile Include="StringUtils.cpp" />

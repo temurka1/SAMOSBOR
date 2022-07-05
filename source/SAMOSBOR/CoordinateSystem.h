@@ -1,4 +1,5 @@
 #pragma once
+#include <gp_Vec.hxx>
 
 namespace SAMOSBOR::core::occ
 {

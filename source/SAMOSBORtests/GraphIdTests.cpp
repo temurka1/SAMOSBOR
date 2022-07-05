@@ -1,5 +1,5 @@
 #include <gtest/gtest.h>
-#include <SAMOSBOR/GraphId.h>
+#include <SAMOSBOR/SAMOSBOR.h>
 
 using GraphId = SAMOSBOR::assembly::ref::GraphId;
 

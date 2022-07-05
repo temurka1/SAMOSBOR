@@ -14,4 +14,4 @@
 
 #include <argparse/argparse.hpp>
 
-#include <SAMOSBOR/Assembly_Builder.h>
+#include <SAMOSBOR/SAMOSBOR.h>

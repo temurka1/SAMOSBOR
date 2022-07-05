@@ -3,15 +3,20 @@
 
 using Transform = SAMOSBOR::core::occ::Transform;
 
+Transform::Transform() : _transform(gp_Trsf()), _name("identity")
+{
+
+}
+
 Transform::Transform(gp_Trsf transform, std::string name): _transform(std::move(transform)), _name(std::move(name))
 {
 }
 
-Transform::Transform(const Transform& other): _transform(other.GetTransform()), _name(other.GetName())
+Transform::Transform(const Transform& other): _transform(other.Get()), _name(other.GetName())
 {
 }
 
-const gp_Trsf& Transform::GetTransform() const
+const gp_Trsf& Transform::Get() const
 {
 	return _transform;
 }
@@ -21,10 +26,16 @@ const std::string& Transform::GetName() const
 	return _name;
 }
 
-Transform Transform::operator*(const Transform& rhs)
+Transform& Transform::PreMultiply(const Transform& rhs)
 {
-	const gp_Trsf transform = GetTransform() * rhs.GetTransform();
-	return Transform(transform, "");
+	_transform.PreMultiply(rhs.Get());
+	return *this;
+}
+
+Transform& Transform::Multiply(const Transform& rhs)
+{
+	_transform.Multiply(rhs.Get());
+	return *this;
 }
 
 Transform& Transform::operator=(const Transform& rhs)
@@ -34,7 +45,7 @@ Transform& Transform::operator=(const Transform& rhs)
 		return *this;
 	}
 
-	_transform = rhs.GetTransform();
+	_transform = rhs.Get();
 	_name = rhs.GetName();
 
 	return *this;

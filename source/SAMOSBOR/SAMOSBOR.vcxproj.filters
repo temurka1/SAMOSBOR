@@ -90,6 +90,16 @@
     <ClInclude Include="StepData.h">
       <Filter>step\ref</Filter>
     </ClInclude>
+    <ClInclude Include="AssemblyBuilder.h">
+      <Filter>assembly\ref</Filter>
+    </ClInclude>
+    <ClInclude Include="AssemblySettings.hpp">
+      <Filter>assembly\ref</Filter>
+    </ClInclude>
+    <ClInclude Include="SAMOSBOR.h" />
+    <ClInclude Include="StepWriter.h">
+      <Filter>step\ref</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -135,6 +145,12 @@
       <Filter>step\ref</Filter>
     </ClCompile>
     <ClCompile Include="StepData.cpp">
+      <Filter>step\ref</Filter>
+    </ClCompile>
+    <ClCompile Include="AssemblyBuilder.cpp">
+      <Filter>assembly\ref</Filter>
+    </ClCompile>
+    <ClCompile Include="StepWriter.cpp">
       <Filter>step\ref</Filter>
     </ClCompile>
   </ItemGroup>

@@ -3,6 +3,7 @@
 #include "GraphId.h"
 #include "AssemblyGraph.h"
 #include "AssemblyGraphBuilder.h"
+#include "AssemblySettings.hpp"
 #include "StepData.h"
 #include "StepReader.h"
 
@@ -14,21 +15,21 @@ namespace assembly = SAMOSBOR::assembly::ref;
 
 using AssemblyGraph = assembly::AssemblyGraph;
 using AssemblyGraphBuilder = assembly::AssemblyGraphBuilder;
-using AssemblyGraphSettings = assembly::AssemblyGraphSettings;
+using AssemblySettings = assembly::AssemblySettings;
 
 using StepData = step::StepData;
 using StepReader = step::StepReader;
 
 namespace
 {
-	fs::path get_input_path(const AssemblyGraphSettings& graphSettings)
+	fs::path get_input_path(const fs::path& dataPath)
 	{
-		if (graphSettings.inputPath.empty())
+		if (dataPath.empty())
 		{
 			return fs::current_path();
 		}
 
-		return graphSettings.inputPath;
+		return dataPath;
 	}
 
 	fs::path get_file_id(fs::path inputPath, const std::string_view& fileId)
@@ -48,9 +49,9 @@ AssemblyGraphBuilder::~AssemblyGraphBuilder()
 	delete _reader;
 }
 
-core::ResultOr<AssemblyGraph> AssemblyGraphBuilder::Build(const GraphId& graphId, const AssemblyGraphSettings& graphSettings)
+core::ResultOr<AssemblyGraph> AssemblyGraphBuilder::Build(const GraphId& graphId, const AssemblySettings& settings)
 {
-	std::filesystem::path inputPath = get_input_path(graphSettings);
+	std::filesystem::path inputPath = get_input_path(settings.dataPath);
 
 	const std::vector<GraphId::Vertex>& vertices = graphId.Vertices();
 	const std::vector<GraphId::Edge>& edges = graphId.Edges();
@@ -72,20 +73,14 @@ core::ResultOr<AssemblyGraph> AssemblyGraphBuilder::Build(const GraphId& graphId
 	for (size_t i = 0; i < vertices.size(); ++i)
 	{
 		const GraphId::Vertex& vertex = vertices[i];
-		const core::ResultOr<StepData> readResult = _reader->Read(get_file_id(inputPath, vertex.fileId));
-		
-		if (readResult.Ok())
-		{
-			graph.pcs[i] = readResult.Value().Pcs();
-			graph.mcs[i] = readResult.Value().Mcs();
-			graph.csw[i] = readResult.Value().Csw();
 
-			graph.shapes[i] = readResult.Value().Shape();
-		}
-		else
-		{
-			return core::ResultOr<AssemblyGraph>(readResult.Res());
-		}
+		ASSIGN_OR_RETURN_T(const StepData& data, _reader->Read(get_file_id(inputPath, vertex.fileId)), AssemblyGraph);
+
+		graph.pcs[i] = data.Pcs();
+		graph.mcs[i] = data.Mcs();
+		graph.csw[i] = data.Csw();
+
+		graph.shapes[i] = data.Shape();
 	}
 
 	// calculate and store transforms (current MCS to parent CSW)
@@ -100,7 +95,7 @@ core::ResultOr<AssemblyGraph> AssemblyGraphBuilder::Build(const GraphId& graphId
 		const CoordinateSystem& mcs = graph.mcs[i];
 		const CoordinateSystem* csw = parentCsw.cs.get(parentCsw.ports[port]);
 
-		graph.transforms[i] = core::occ::GetTransform(mcs, *csw);
+		graph.transforms[i] = core::occ::GetTransform(mcs, *csw).PreMultiply(graph.transforms[parentIdx]);
 	}
 
 	return core::ResultOr<AssemblyGraph>(graph);

@@ -1,5 +1,4 @@
 #pragma once
-#include <filesystem>
 
 namespace SAMOSBOR::step::ref
 {
@@ -14,15 +13,11 @@ namespace SAMOSBOR::core
 namespace SAMOSBOR::assembly::ref
 {
 	namespace core = SAMOSBOR::core;
+	namespace step = SAMOSBOR::step::ref;
 
 	struct GraphId;
 	struct AssemblyGraph;
-
-	struct AssemblyGraphSettings
-	{
-		std::filesystem::path inputPath;
-		float extensionLength;
-	};
+	struct AssemblySettings;
 
 	/// <summary>
 	/// Composes graph for tool assembly encoded in graph id
@@ -30,12 +25,12 @@ namespace SAMOSBOR::assembly::ref
 	class AssemblyGraphBuilder final
 	{
 	public:
-		core::ResultOr<AssemblyGraph> Build(const GraphId& graphId, const AssemblyGraphSettings& graphSettings);
+		core::ResultOr<AssemblyGraph> Build(const GraphId& graphId, const AssemblySettings& settings);
 
 		AssemblyGraphBuilder();
 		~AssemblyGraphBuilder();
 	private:
-		step::ref::StepReader* _reader;
+		step::StepReader* _reader;
 	};
 }
 

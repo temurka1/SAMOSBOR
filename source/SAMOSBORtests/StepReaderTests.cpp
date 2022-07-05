@@ -1,11 +1,8 @@
 #include <gtest/gtest.h>
 #include <filesystem>
-#include <SAMOSBOR/ResultOr.hpp>
-#include <SAMOSBOR/StepData.h>
-#include <SAMOSBOR/StepReader.h>
-#include <SAMOSBOR/CoordinateSystem.h>
-#include <SAMOSBOR/Shape.hpp>
-#include <SAMOSBOR/Csw.hpp>
+#include <SAMOSBOR/SAMOSBOR.h>
+
+namespace fs = std::filesystem;
 
 namespace core = SAMOSBOR::core;
 namespace step = SAMOSBOR::step::ref;
@@ -19,7 +16,7 @@ using CoordinateSystem = core::occ::CoordinateSystem;
 
 TEST(StepReaderTests, OpenStepFile)
 {
-	std::filesystem::path filePath = std::filesystem::path("../../../data/tool_1/3.76045R028V.STP");
+	std::filesystem::path filePath = fs::path("../../../data/tool_1/3.76045R028V.STP");
 
 	StepReader reader;
 	core::ResultOr<StepData> result = reader.Read(filePath);
@@ -29,7 +26,7 @@ TEST(StepReaderTests, OpenStepFile)
 
 TEST(StepReaderTests, CorrectCoordinateSystems)
 {
-	std::filesystem::path filePath = std::filesystem::path("../../../data/tool_1/5.34280R028080.STP");
+	std::filesystem::path filePath = fs::path("../../../data/tool_1/5.34280R028080.STP");
 	
 	StepReader reader;
 	core::ResultOr<StepData> result = reader.Read(filePath);
