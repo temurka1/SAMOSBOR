@@ -68,8 +68,8 @@ Csw StepData::Csw() const
 			Csw::Port port = 0;
 			Csw::Key key = csw.cs.emplace(cs.second);
 
-			// convert CSW number string (could be "1", "1_1", "2_1", etc.) into hexademical number string
-			// and then convert to decimal - this will be our port identifier futher on
+			// CSW index => hex string => decimal number (port)
+			// no CSW index => 0 (port)
 
 			const std::string portStr = utils::string_to_hex(cs.first.substr(3, cs.first.length() - 3));
 			if (!portStr.empty())

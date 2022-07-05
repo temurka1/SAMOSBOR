@@ -17,14 +17,9 @@ namespace SAMOSBOR::assembly::ref
 	/// </summary>
 	struct AssemblyGraph
 	{
-		struct Hierarchy
-		{
-			std::vector<uint8_t> parents;
-			std::vector<uint8_t> ports;
-		};
+		std::vector<uint8_t> hierarchy;
+		std::vector<uint32_t> ports;
 
-		Hierarchy hierarchy;
-		
 		std::vector<Shape> shapes;
 		std::vector<Transform> transforms;
 

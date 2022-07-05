@@ -13,6 +13,7 @@ namespace SAMOSBOR::core::occ
 		Transform operator*(const Transform& rhs);
 		Transform& operator=(const Transform& rhs);
 
+		Transform() = default;
 		Transform(gp_Trsf transform, std::string name = "");
 		Transform(const Transform& other);
 	private:

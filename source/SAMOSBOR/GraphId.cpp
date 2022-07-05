@@ -62,7 +62,7 @@ namespace
 			uint8_t index;
 			std::from_chars(indexStr.data(), indexStr.data() + indexStr.size(), index);
 
-			vertexList[i] = GraphId::Vertex{ .fileId = vertexComponents[0], .index = index, .toolType = string_to_tooltype(toolTypeStr) };
+			vertexList[i] = GraphId::Vertex{ .fileId = fileIdStr, .index = index, .toolType = string_to_tooltype(toolTypeStr) };
 
 			vertexComponents.clear();
 		}
@@ -98,7 +98,7 @@ namespace
 			uint32_t port = 0;
 			if (edgeComponents.size() == EDGE_COMPONENTS_COUNT)
 			{
-				std::from_chars(edgeComponents[2].data(), edgeComponents[2].data() + edgeComponents[2].size(), port, 16);
+				std::from_chars(edgeComponents[2].data(), edgeComponents[2].data() + edgeComponents[2].size(), port, 10);
 			}
 
 			edgeList[i] = GraphId::Edge { .port = port, .from = edge_from, .to = edge_to };

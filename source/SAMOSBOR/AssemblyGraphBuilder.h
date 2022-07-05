@@ -1,4 +1,5 @@
 #pragma once
+#include <filesystem>
 
 namespace SAMOSBOR::step::ref
 {
@@ -19,6 +20,7 @@ namespace SAMOSBOR::assembly::ref
 
 	struct AssemblyGraphSettings
 	{
+		std::filesystem::path inputPath;
 		float extensionLength;
 	};
 

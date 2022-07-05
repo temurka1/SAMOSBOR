@@ -5,11 +5,12 @@ using AssemblyGraph = SAMOSBOR::assembly::ref::AssemblyGraph;
 
 AssemblyGraph::AssemblyGraph(const size_t toolItemsCount)
 {
-	hierarchy.parents.reserve(toolItemsCount);
-	hierarchy.ports.reserve(toolItemsCount);
-	transforms.reserve(toolItemsCount);
-	shapes.reserve(toolItemsCount);
-	pcs.reserve(toolItemsCount);
-	mcs.reserve(toolItemsCount);
-	csw.reserve(toolItemsCount);
+	hierarchy.resize(toolItemsCount, 0);
+	ports.resize(toolItemsCount, 0);
+
+	transforms.resize(toolItemsCount);
+	shapes.resize(toolItemsCount);
+	pcs.resize(toolItemsCount);
+	mcs.resize(toolItemsCount);
+	csw.resize(toolItemsCount);
 }

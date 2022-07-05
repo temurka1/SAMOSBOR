@@ -47,11 +47,11 @@ TEST(GraphIdParsingTests, TwoInserts)
 	EXPECT_EQ(0, edges[0].from);
 	EXPECT_EQ(1, edges[0].to);
 
-	EXPECT_EQ(49, edges[1].port);
+	EXPECT_EQ(31, edges[1].port);
 	EXPECT_EQ(1, edges[1].from);
 	EXPECT_EQ(2, edges[1].to);
 
-	EXPECT_EQ(50, edges[2].port);	
+	EXPECT_EQ(32, edges[2].port);	
 	EXPECT_EQ(1, edges[2].from);
 	EXPECT_EQ(3, edges[2].to);
 }
