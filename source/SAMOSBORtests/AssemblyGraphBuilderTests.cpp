@@ -14,10 +14,10 @@ using AssemblyGraphSettings = assembly::AssemblyGraphSettings;
 
 TEST(AssemblyGraphBuilderTests, AssemblyTwoNodes)
 {
-	GraphId idx("");
+	GraphId graphId("3.77000R051V.STP");
 	AssemblyGraphBuilder builder;
 
-	core::ResultOr<AssemblyGraph> graph = builder.Build(idx, AssemblyGraphSettings{ .extensionLength = 0 });
+	core::ResultOr<AssemblyGraph> graph = builder.Build(graphId, AssemblyGraphSettings{ .extensionLength = 0 });
 }
 
 TEST(AssemblyGraphBuilderTests, AssemblyThreeNodes)

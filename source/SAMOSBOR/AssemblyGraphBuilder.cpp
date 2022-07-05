@@ -34,17 +34,18 @@ core::ResultOr<AssemblyGraph> AssemblyGraphBuilder::Build(const GraphId& graphId
 
 	AssemblyGraph graph(vertices.size());
 
-	// * build hierarchy
-	// * sort hierarchy in depth-first order - to ensure sequental access pattern
-	// * based on hierarchy fill data arrays in assembly graph - shapes, coordinate systems
-	// * calculate and fill transfroms (current MCS to parent CSW)
-	
+	// build the graph hierarchy
+	//
 	for (size_t i = 0; i < edges.size(); ++i)
 	{
 		const GraphId::Edge& edge = edges[i];
-		graph.hierarchy[edge.to] = edge.from;
+
+		graph.hierarchy.parents[edge.to] = edge.from;
+		graph.hierarchy.ports[edge.to] = edge.port;
 	}
 
+	// fill up the data - shapes, coordinate systems, etc
+	//
 	for (size_t i = 0; i < vertices.size(); ++i)
 	{
 		const GraphId::Vertex& vertex = vertices[i];
@@ -64,14 +65,21 @@ core::ResultOr<AssemblyGraph> AssemblyGraphBuilder::Build(const GraphId& graphId
 		}
 	}
 
+	// calculate and store transforms (current MCS to parent CSW)
+	//
 	for (size_t i = 0; i < vertices.size(); ++i)
 	{
-		const uint8_t parent = graph.hierarchy[i];
+		const uint8_t parentIdx = graph.hierarchy.parents[i];
+
+		Csw& csw = graph.csw[parentIdx];
+
+		const Csw::Port& port = graph.hierarchy.ports[parentIdx];
+		const Csw::Key& key = csw.ports[port];
 
 		const CoordinateSystem& mcsCurrent = graph.mcs[i];
-		const CoordinateSystem& cswParent = graph.csw[parent].;
+		const CoordinateSystem* cswParent = csw.cs.get(key);
 
-		graph.transforms[i] = core::occ::GetTransform(mcsCurrent, cswParent);
+		graph.transforms[i] = core::occ::GetTransform(mcsCurrent, *cswParent);
 	}
 
 	return core::ResultOr<AssemblyGraph>(graph);

@@ -8,6 +8,8 @@ namespace SAMOSBOR::core::occ
 	struct Csw;
 }
 
+class Interface_InterfaceModel;
+
 namespace SAMOSBOR::step::ref
 {
 	namespace core = SAMOSBOR::core;
@@ -15,7 +17,7 @@ namespace SAMOSBOR::step::ref
 	/// <summary>
 	/// Data contained in STEP file
 	/// </summary>
-	struct StepData
+	class StepData
 	{
 	public:
 		StepData() = default;

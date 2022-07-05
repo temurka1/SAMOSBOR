@@ -1,6 +1,7 @@
 #include <gtest/gtest.h>
 #include <filesystem>
 #include <SAMOSBOR/ResultOr.hpp>
+#include <SAMOSBOR/StepData.h>
 #include <SAMOSBOR/StepReader.h>
 #include <SAMOSBOR/CoordinateSystem.h>
 #include <SAMOSBOR/Shape.hpp>
@@ -37,10 +38,17 @@ TEST(StepReaderTests, CorrectCoordinateSystems)
 	CoordinateSystem mcs = result.Value().Mcs();
 	CoordinateSystem pcs = result.Value().Pcs();
 
-	EXPECT_EQ(1, csw.count);
-	EXPECT_EQ(1.7763568394002501e-15, csw.cs[0].origin.X());
-	EXPECT_EQ(0.0, csw.cs[0].origin.Y());
-	EXPECT_EQ(-89.975, csw.cs[0].origin.Z());
+	EXPECT_EQ(false, csw.cs.empty());
+	EXPECT_EQ(false, csw.ports.empty());
+
+	auto it = csw.ports.begin();
+	Csw::Key cswkey = it->second;
+
+	CoordinateSystem* cswCs = csw.cs.get(cswkey);
+
+	EXPECT_EQ(1.7763568394002501e-15, cswCs->origin.X());
+	EXPECT_EQ(0.0, cswCs->origin.Y());
+	EXPECT_EQ(-89.975, cswCs->origin.Z());
 
 	EXPECT_EQ(0.0, pcs.origin.X());
 	EXPECT_EQ(0.0, pcs.origin.Y());

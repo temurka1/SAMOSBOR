@@ -17,10 +17,13 @@ namespace SAMOSBOR::assembly::ref
 	/// </summary>
 	struct AssemblyGraph
 	{
-		/// <summary>
-		/// Stores parent indicies, i.e. parent_of_i = hierarchy[i]
-		/// </summary>
-		std::vector<uint16_t> hierarchy;
+		struct Hierarchy
+		{
+			std::vector<uint8_t> parents;
+			std::vector<uint8_t> ports;
+		};
+
+		Hierarchy hierarchy;
 		
 		std::vector<Shape> shapes;
 		std::vector<Transform> transforms;

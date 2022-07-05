@@ -189,7 +189,6 @@
     <ClCompile Include="Assembly_Parser.cpp" />
     <ClCompile Include="Assembly_TransformationVisitor.cpp" />
     <ClCompile Include="CoordinateSystem.cpp" />
-    <ClCompile Include="Csw.cpp" />
     <ClCompile Include="GraphId.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>

@@ -3,7 +3,7 @@
 namespace SAMOSBOR::assembly::ref
 {
 	/// <summary>
-	/// The graph id is a set of vertices and/or edges encoded in string. 
+	/// The graph id is a set of vertices and/or edges encoded in string.
 	/// Used to represent structure of tool assembly in short and clear way.
 	/// For more info take a look at https://github.com/temurka1/SAMOSBOR/issues/1
 	/// </summary>
@@ -19,9 +19,9 @@ namespace SAMOSBOR::assembly::ref
 
 		struct Edge
 		{
+			uint32_t port;
 			uint8_t from;
 			uint8_t to;
-			uint8_t port;
 		};
 
 		[[nodiscard]] const std::vector<Vertex>& Vertices() const;
