@@ -22,16 +22,19 @@
     <Filter Include="core\utils">
       <UniqueIdentifier>{e39c292b-5326-42dd-9790-20ceba84fdea}</UniqueIdentifier>
     </Filter>
+    <Filter Include="step\old">
+      <UniqueIdentifier>{6d5c3d9d-8591-4f51-8a1d-46781f242eaf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="step\ref">
+      <UniqueIdentifier>{ca44c07c-4447-406c-b5b6-7ae91635b5a8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="core\occ">
+      <UniqueIdentifier>{fb118bdd-cf72-4080-9191-134be998643b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
       <Filter>pch</Filter>
-    </ClInclude>
-    <ClInclude Include="Step_Writer.h">
-      <Filter>step</Filter>
-    </ClInclude>
-    <ClInclude Include="Step_Reader.h">
-      <Filter>step</Filter>
     </ClInclude>
     <ClInclude Include="Result.hpp">
       <Filter>core</Filter>
@@ -63,16 +66,34 @@
     <ClInclude Include="StringUtils.h">
       <Filter>core\utils</Filter>
     </ClInclude>
+    <ClInclude Include="Step_Reader.h">
+      <Filter>step\old</Filter>
+    </ClInclude>
+    <ClInclude Include="Step_Writer.h">
+      <Filter>step\old</Filter>
+    </ClInclude>
+    <ClInclude Include="Transform.h">
+      <Filter>core\occ</Filter>
+    </ClInclude>
+    <ClInclude Include="Shape.hpp">
+      <Filter>core\occ</Filter>
+    </ClInclude>
+    <ClInclude Include="CoordinateSystem.h">
+      <Filter>core\occ</Filter>
+    </ClInclude>
+    <ClInclude Include="Csw.hpp">
+      <Filter>core\occ</Filter>
+    </ClInclude>
+    <ClInclude Include="StepReader.h">
+      <Filter>step\ref</Filter>
+    </ClInclude>
+    <ClInclude Include="StepData.h">
+      <Filter>step\ref</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
       <Filter>pch</Filter>
-    </ClCompile>
-    <ClCompile Include="Step_Writer.cpp">
-      <Filter>step</Filter>
-    </ClCompile>
-    <ClCompile Include="Step_Reader.cpp">
-      <Filter>step</Filter>
     </ClCompile>
     <ClCompile Include="AssemblyGraph.cpp">
       <Filter>assembly\ref</Filter>
@@ -97,6 +118,24 @@
     </ClCompile>
     <ClCompile Include="StringUtils.cpp">
       <Filter>core\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="Step_Reader.cpp">
+      <Filter>step\old</Filter>
+    </ClCompile>
+    <ClCompile Include="Step_Writer.cpp">
+      <Filter>step\old</Filter>
+    </ClCompile>
+    <ClCompile Include="Transform.cpp">
+      <Filter>core\occ</Filter>
+    </ClCompile>
+    <ClCompile Include="CoordinateSystem.cpp">
+      <Filter>core\occ</Filter>
+    </ClCompile>
+    <ClCompile Include="StepReader.cpp">
+      <Filter>step\ref</Filter>
+    </ClCompile>
+    <ClCompile Include="StepData.cpp">
+      <Filter>step\ref</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

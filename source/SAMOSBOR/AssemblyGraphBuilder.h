@@ -1,14 +1,28 @@
 #pragma once
+#include <filesystem>
 
-namespace SAMOSBOR::step
+namespace SAMOSBOR::step::ref
 {
-	class Step_Reader;
+	class StepReader;
+}
+
+namespace SAMOSBOR::core
+{
+	template<class T> class ResultOr;
 }
 
 namespace SAMOSBOR::assembly::ref
 {
-	struct AssemblyGraph;
+	namespace core = SAMOSBOR::core;
+
 	struct GraphId;
+	struct AssemblyGraph;
+
+	struct AssemblyGraphSettings
+	{
+		std::filesystem::path inputPath;
+		float extensionLength;
+	};
 
 	/// <summary>
 	/// Composes graph for tool assembly encoded in graph id
@@ -16,10 +30,12 @@ namespace SAMOSBOR::assembly::ref
 	class AssemblyGraphBuilder final
 	{
 	public:
+		core::ResultOr<AssemblyGraph> Build(const GraphId& graphId, const AssemblyGraphSettings& graphSettings);
+
 		AssemblyGraphBuilder();
 		~AssemblyGraphBuilder();
 	private:
-		step::Step_Reader* _reader;
+		step::ref::StepReader* _reader;
 	};
 }
 

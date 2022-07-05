@@ -10,3 +10,6 @@
 [submodule "thirdparty/googletest"]
 	path = thirdparty/googletest
 	url = https://github.com/predeps/googletest
+[submodule "thirdparty/slot_map"]
+	path = thirdparty/slot_map
+	url = https://github.com/SergeyMakeev/slot_map.git
