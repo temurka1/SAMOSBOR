@@ -3,10 +3,13 @@
 #include "Assembly_GraphBuilder.h"
 
 #include "Step_Reader.h"
+#include <filesystem>
 
 using namespace std;
 using namespace SAMOSBOR::step;
 using namespace SAMOSBOR::assembly;
+
+namespace fs = std::filesystem;
 
 Assembly_Node::Assembly_Node()
 {
@@ -45,7 +48,10 @@ AssemblyGraph Assembly_GraphBuilder::Build(const vector<shared_ptr<Assembly_Pars
 
 	vertex_t rootNode = boost::add_vertex(graph);
 
-	auto rootStepData = _stepReader->Read(root->filename);
+	fs::path path("data/tool_5");
+	path /= root->filename;
+
+	auto rootStepData = _stepReader->Read(path.string().c_str());
 
 	graph[rootNode].shape = rootStepData.shape;
 	graph[rootNode].id = root->id;
@@ -66,6 +72,8 @@ void Assembly_GraphBuilder::BuildInternal(
 	const vector<shared_ptr<Assembly_ParsedItem>>& parsed,
 	const float extensionLength)
 {
+	fs::path path("data/tool_5");
+
 	auto rootCsws = this->GetCsws(rootStepData);
 	auto children = this->GetChildren(root, parsed);
 
@@ -74,7 +82,9 @@ void Assembly_GraphBuilder::BuildInternal(
 
 	for (auto child : children)
 	{
-		auto childStepData = _stepReader->Read(child->filename);
+		fs::path filePath = path / child->filename;
+
+		auto childStepData = _stepReader->Read(filePath.string().c_str());
 		auto childMcs = StepToGeom::MakeAxis2Placement(childStepData.mcs);
 
 		// mcs

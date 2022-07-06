@@ -9,11 +9,9 @@ using AssemblySettings = assembly::AssemblySettings;
 using AssemblyGraphSettings = assembly::AssemblyGraphSettings;
 using AssemblyBuilder = assembly::AssemblyBuilder;
 
-using Assembly_Builder = SAMOSBOR::assembly::Assembly_Builder;
-
 static void DoSetup(const benchmark::State& state) 
 {
-	const fs::path outputDirPath = fs::path("../../../data/output/");
+	const fs::path outputDirPath = fs::path("output/");
 
 	if (!fs::exists(outputDirPath))
 	{
@@ -23,16 +21,19 @@ static void DoSetup(const benchmark::State& state)
 
 static void DoTeardown(const benchmark::State& state) 
 {
-	const fs::path outputDirPath = fs::path("../../../data/output/");
+	const fs::path outputDirPath = fs::path("output/");
 
-	for (auto& path : fs::directory_iterator(outputDirPath))
+	if (fs::exists(outputDirPath))
 	{
-		fs::remove_all(path);
+		for (auto& path : fs::directory_iterator(outputDirPath))
+		{
+			fs::remove_all(path);
+		}
 	}
 }
 
 template <class ...Args>
-void AssemblyCreationGraphId(benchmark::State& state, Args&&... args)
+void AssemblyCreation_Ref(benchmark::State& state, Args&&... args)
 {
 	auto args_tuple = std::make_tuple(std::move(args)...);
 
@@ -58,46 +59,15 @@ void AssemblyCreationGraphId(benchmark::State& state, Args&&... args)
 	}
 }
 
-template <class ...Args>
-void AssemblyCreationJsonBoost(benchmark::State& state, Args&&... args)
-{
-	auto args_tuple = std::make_tuple(std::move(args)...);
-
-	fs::path structureFilePath = std::get<0>(args_tuple);
-	fs::path outputFilePath = std::get<1>(args_tuple);
-
-	std::string structureFile = structureFilePath.string();
-	std::string outputFile = outputFilePath.string();
-
-	Assembly_Builder builder;
-	
-	for (auto _ : state)
-	{
-		builder.Build(structureFile, outputFile, 0.0f);
-	}
-}
-
 BENCHMARK_CAPTURE(
-	AssemblyCreationGraphId,
-	AssemblyTwoNodesGraphId, 
-	std::string("15107_0h.20_1t#0+1"), 
-	fs::path("../../../data/tool_3"), 
-	fs::path("../../../data/output/assembly_3.stp"))
+	AssemblyCreation_Ref,
+	TwoNodes, 
+	std::string("avtA_0.Qlwi_1.LoOYVa_2.wX_3.ZfTr_4.wNC_5#0+1.1+2@3235633.1+3@3235634.1+4@49.2+5@3235633"), 
+	fs::path("data/tool_5"), 
+	fs::path("output/assembly_5.stp"))
 		->Setup(DoSetup)
 		->Teardown(DoTeardown)
-		->Repetitions(10)
+		->Iterations(10)
 		->DisplayAggregatesOnly()
-		->Unit(benchmark::kMillisecond)
-		->MeasureProcessCPUTime();
-
-BENCHMARK_CAPTURE(
-	AssemblyCreationJsonBoost,
-	AssemblyTwoNodesJson,
-	fs::path("../../../data/tool_3/assembly.json"),
-	fs::path("../../../data/output/assembly_3.stp"))
-		->Setup(DoSetup)
-		->Teardown(DoTeardown)
-		->Repetitions(10)
-		->DisplayAggregatesOnly()
-		->Unit(benchmark::kMillisecond)
-		->MeasureProcessCPUTime();
+		->MeasureProcessCPUTime()
+		->Unit(benchmark::kMillisecond);

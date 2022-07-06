@@ -25,7 +25,6 @@ core::ResultOr<StepData> StepReader::Read(const std::filesystem::path& filepath,
 	if (printCheckload)
 	{
 		reader.PrintCheckLoad(false, IFSelect_ItemsByEntity);
-		reader.PrintCheckTransfer(false, IFSelect_ItemsByEntity);
 	}
 
 	for (auto n = 1; n <= numberOfRoots; n++)
@@ -33,10 +32,15 @@ core::ResultOr<StepData> StepReader::Read(const std::filesystem::path& filepath,
 		reader.TransferRoot(n);
 	}
 
+	if (printCheckload)
+	{
+		reader.PrintCheckTransfer(false, IFSelect_ItemsByEntity);
+	}
+
 	Standard_Integer numberOfShapes = reader.NbShapes();	
 	if (numberOfShapes == 0)
 	{
-		return core::ResultOr<StepData>(core::Result(core::Result::StatusCode::ERROR));
+		return core::ResultOr<StepData>(core::Result(core::Result::StatusCode::ERROR, "No shapes in STEP file"));
 	}
 
 	StepData stepData(reader.Model(), reader.Shape());

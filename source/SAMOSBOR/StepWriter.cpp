@@ -21,5 +21,7 @@ core::Result StepWriter::Write(const fs::path& output, const std::vector<TopoDS_
 		writer.Transfer(shape, STEPControl_AsIs);
 	}
 
-	writer.Write(output.string().c_str());
+	IFSelect_ReturnStatus status = writer.Write(output.string().c_str());
+
+	return core::Result(status == IFSelect_ReturnStatus::IFSelect_RetDone ? core::Result::OK : core::Result::ERROR);
 }

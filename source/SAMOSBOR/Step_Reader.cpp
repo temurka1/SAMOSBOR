@@ -48,10 +48,7 @@ tuple<Step_Data, IFSelect_ReturnStatus> Step_Reader::ReadStep(const string& file
 	if (status != IFSelect_RetDone)
 		return make_tuple(result, status);
 
-	reader.PrintCheckLoad(false, IFSelect_ItemsByEntity);
-
 	auto numberOfRoots = reader.NbRootsForTransfer();
-	reader.PrintCheckTransfer(false, IFSelect_ItemsByEntity);
 
 	for (auto n = 1; n <= numberOfRoots; n++)
 	{

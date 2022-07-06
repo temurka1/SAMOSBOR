@@ -11,5 +11,3 @@
 #include "StepData.h"
 #include "StepReader.h"
 #include "StepWriter.h"
-
-#include "Assembly_Builder.h"
