@@ -13,3 +13,6 @@
 [submodule "thirdparty/slot_map"]
 	path = thirdparty/slot_map
 	url = https://github.com/SergeyMakeev/slot_map.git
+[submodule "thirdparty/googlebenchmark"]
+	path = thirdparty/googlebenchmark
+	url = https://github.com/predeps/googlebenchmark
