@@ -35,9 +35,9 @@ namespace SAMOSBOR::core
 			return _code;
 		}
 
-		const std::string& Error() const
+		const std::string_view& Error() const
 		{
-			return std::string(_message);
+			return _message;
 		}
 
 		bool Ok() const

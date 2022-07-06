@@ -50,5 +50,5 @@ core::Result AssemblyBuilder::Build(const std::string_view& graphString, const A
 		outputShapes.push_back(shape.Moved(loc, false));
 	}
 
-	_stepWriter->Write(settings.outputPath, outputShapes);
+	return _stepWriter->Write(settings.outputPath, outputShapes);
 }
