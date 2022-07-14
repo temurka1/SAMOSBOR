@@ -3,25 +3,31 @@
 #include "Result.hpp"
 
 namespace fs = std::filesystem;
+namespace occt = opencascade;
 namespace core = SAMOSBOR::core;
 
 using StepWriter = SAMOSBOR::step::ref::StepWriter;
 
+StepWriter::StepWriter() : _writer(new STEPControl_Writer)
+{
+	// disable parametric curves
+	Interface_Static::SetIVal("write.surfacecurve.mode", 0);
+	Interface_Static::SetIVal("write.step.assembly", 1);
+}
+
+StepWriter::~StepWriter()
+{
+	delete _writer;
+}
+
 core::Result StepWriter::Write(const fs::path& output, const std::vector<TopoDS_Shape>& data)
 {
-	STEPControl_Writer writer;
-
-	if (!Interface_Static::SetIVal("write.step.assembly", 1))
-	{
-		return core::Result(core::Result::StatusCode::ERROR, "Can't set write.step.assembly flag");
-	}
-
 	for (const TopoDS_Shape& shape : data)
 	{
-		writer.Transfer(shape, STEPControl_AsIs);
+		_writer->Transfer(shape, STEPControl_ManifoldSolidBrep);
 	}
 
-	IFSelect_ReturnStatus status = writer.Write(output.string().c_str());
+	IFSelect_ReturnStatus status = _writer->Write(output.string().c_str());
 
 	return core::Result(status == IFSelect_ReturnStatus::IFSelect_RetDone ? core::Result::OK : core::Result::ERROR);
 }

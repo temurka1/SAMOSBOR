@@ -30,7 +30,7 @@ StepData::StepData(const Handle(Interface_InterfaceModel)& model, const TopoDS_S
 			{ 
 				.origin = gp_Vec(axis.Location().XYZ()), 
 				.uAxis = gp_Vec(axis.Direction().XYZ()), 
-				.vAxis = gp_Vec(axis.XDirection().XYZ()) 
+				.vAxis = gp_Vec(axis.XDirection().XYZ())
 			};
 		}
 	}

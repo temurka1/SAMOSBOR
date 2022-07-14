@@ -21,7 +21,7 @@ namespace SAMOSBOR::assembly::ref
 	class AssemblyBuilder
 	{
 	public:
-		AssemblyBuilder();
+		AssemblyBuilder(bool silenceOcctMessages = true);
 		~AssemblyBuilder();
 
 		core::Result Build(const std::string_view& graphString, const AssemblySettings& settings);

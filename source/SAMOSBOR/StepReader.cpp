@@ -8,41 +8,41 @@ namespace core = SAMOSBOR::core;
 using StepData = SAMOSBOR::step::ref::StepData;
 using StepReader = SAMOSBOR::step::ref::StepReader;
 
+StepReader::StepReader(): _reader(new STEPControl_Reader)
+{
+	Interface_Static::SetIVal("read.step.root.transformation", 0);
+}
+
+StepReader::~StepReader()
+{
+	delete _reader;
+}
+
 core::ResultOr<StepData> StepReader::Read(const std::filesystem::path& filepath, bool printCheckload)
 {
 	std::string modelFileName = filepath.string();
 
-	STEPControl_Reader reader;
-	IFSelect_ReturnStatus status = reader.ReadFile(modelFileName.c_str());
+	IFSelect_ReturnStatus status = _reader->ReadFile(modelFileName.c_str());
 
 	if (status != IFSelect_RetDone)
 	{
 		return core::ResultOr<StepData>(core::Result(core::Result::StatusCode::ERROR));
 	}
 
-	Standard_Integer numberOfRoots = reader.NbRootsForTransfer();
+	_reader->TransferRoots();
 
 	if (printCheckload)
 	{
-		reader.PrintCheckLoad(false, IFSelect_ItemsByEntity);
+		_reader->PrintCheckLoad(true, IFSelect_ItemsByEntity);
+		_reader->PrintCheckTransfer(true, IFSelect_ItemsByEntity);
 	}
 
-	for (auto n = 1; n <= numberOfRoots; n++)
-	{
-		reader.TransferRoot(n);
-	}
-
-	if (printCheckload)
-	{
-		reader.PrintCheckTransfer(false, IFSelect_ItemsByEntity);
-	}
-
-	Standard_Integer numberOfShapes = reader.NbShapes();	
+	Standard_Integer numberOfShapes = _reader->NbShapes();
 	if (numberOfShapes == 0)
 	{
 		return core::ResultOr<StepData>(core::Result(core::Result::StatusCode::ERROR, "No shapes in STEP file"));
 	}
 
-	StepData stepData(reader.Model(), reader.Shape());
+	StepData stepData(_reader->Model(), _reader->OneShape());
 	return core::ResultOr<StepData>(std::move(stepData));
 }

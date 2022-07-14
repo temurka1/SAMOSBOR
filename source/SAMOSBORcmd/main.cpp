@@ -10,7 +10,7 @@ using AssemblyGraphSettings = SAMOSBOR::assembly::ref::AssemblyGraphSettings;
 using Result = SAMOSBOR::core::Result;
 
 // Usage: 
-// SAMOSBORcmd.exe --s 15107_0h.20_1t#0+1 --o assembly.stp --l 40
+// SAMOSBORcmd.exe --id 15107_0h.20_1t#0+1 --i data/tool3 --o assembly.stp --l 40
 
 int main(int argc, char* argv[])
 {
@@ -19,6 +19,7 @@ int main(int argc, char* argv[])
 	program.add_description("Command-line tool to create tool assembly STEP model");
 
 	program.add_argument("--id").help("assembly graph id string").required();
+	program.add_argument("--i").help("path with input STEP files").required();
 	program.add_argument("--o").help("output tool assembly file").required();
 	program.add_argument("--l").help("extension length").default_value(0).scan<'i', int>();
 	program.add_argument("help");
@@ -27,7 +28,7 @@ int main(int argc, char* argv[])
 
 	AssemblySettings settings
 	{
-		.dataPath = fs::path("data/tool_3"),
+		.dataPath = fs::current_path() / program.get<std::string>("--i"),
 		.outputPath = fs::current_path() / program.get<std::string>("--o"),
 		.graphSettings = AssemblyGraphSettings
 		{

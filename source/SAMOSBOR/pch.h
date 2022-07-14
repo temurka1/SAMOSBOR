@@ -23,6 +23,9 @@
 #include <Geom_Axis2Placement.hxx>
 #include <StepToGeom.hxx>
 #include <BRepBuilderAPI_Copy.hxx>
+#include <Message.hxx>
+#include <Message_Messenger.hxx>
+#include <Message_PrinterOStream.hxx>
 
 #include <gp_Pnt2d.hxx>
 #include <gp_Ax3.hxx>
