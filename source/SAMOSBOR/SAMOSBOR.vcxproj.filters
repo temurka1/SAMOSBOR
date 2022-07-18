@@ -19,6 +19,9 @@
     <Filter Include="core\occ">
       <UniqueIdentifier>{fb118bdd-cf72-4080-9191-134be998643b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="gltf">
+      <UniqueIdentifier>{e8d7c5f2-3f84-4984-8f60-033a50e9ce6d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
@@ -70,6 +73,15 @@
     <ClInclude Include="GraphId.h">
       <Filter>assembly</Filter>
     </ClInclude>
+    <ClInclude Include="GltfWriter.h">
+      <Filter>gltf</Filter>
+    </ClInclude>
+    <ClInclude Include="Mesh.hpp">
+      <Filter>core\occ</Filter>
+    </ClInclude>
+    <ClInclude Include="Triangulation.h">
+      <Filter>core\occ</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -104,6 +116,12 @@
     </ClCompile>
     <ClCompile Include="GraphId.cpp">
       <Filter>assembly</Filter>
+    </ClCompile>
+    <ClCompile Include="GltfWriter.cpp">
+      <Filter>gltf</Filter>
+    </ClCompile>
+    <ClCompile Include="Triangulation.cpp">
+      <Filter>core\occ</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

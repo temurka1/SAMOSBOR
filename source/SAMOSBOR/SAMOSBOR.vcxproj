@@ -124,7 +124,7 @@
     </Link>
     <Lib>
       <AdditionalLibraryDirectories>$(SolutionDir)..\thirdparty\opencascade\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>TKernel.lib;TKXSBase.lib;TKSTEPBase.lib;TKSTEP.lib;TKG3d.lib;TKMath.lib;TKTopAlgo.lib;TKBRep.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>TKernel.lib;TKXSBase.lib;TKSTEPBase.lib;TKSTEP.lib;TKG3d.lib;TKMath.lib;TKTopAlgo.lib;TKBRep.lib;TKGeomAlgo.lib;TKGeomBase.lib;TKMesh.lib;TKMeshVS.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalOptions>/ignore:4006 %(AdditionalOptions)</AdditionalOptions>
     </Lib>
     <PostBuildEvent>
@@ -159,7 +159,7 @@
     </Link>
     <Lib>
       <AdditionalLibraryDirectories>$(SolutionDir)..\thirdparty\opencascade\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>TKernel.lib;TKXSBase.lib;TKSTEPBase.lib;TKSTEP.lib;TKG3d.lib;TKMath.lib;TKTopAlgo.lib;TKBRep.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>TKernel.lib;TKXSBase.lib;TKSTEPBase.lib;TKSTEP.lib;TKG3d.lib;TKMath.lib;TKTopAlgo.lib;TKBRep.lib;TKGeomAlgo.lib;TKGeomBase.lib;TKMesh.lib;TKMeshVS.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalOptions>/ignore:4006 %(AdditionalOptions)</AdditionalOptions>
     </Lib>
     <PostBuildEvent>
@@ -173,7 +173,9 @@
     <ClInclude Include="AssemblySettings.hpp" />
     <ClInclude Include="CoordinateSystem.h" />
     <ClInclude Include="Csw.hpp" />
+    <ClInclude Include="GltfWriter.h" />
     <ClInclude Include="GraphId.h" />
+    <ClInclude Include="Mesh.hpp" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Result.hpp" />
     <ClInclude Include="ResultOr.hpp" />
@@ -184,12 +186,14 @@
     <ClInclude Include="StepWriter.h" />
     <ClInclude Include="StringUtils.h" />
     <ClInclude Include="Transform.h" />
+    <ClInclude Include="Triangulation.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AssemblyBuilder.cpp" />
     <ClCompile Include="AssemblyGraph.cpp" />
     <ClCompile Include="AssemblyGraphBuilder.cpp" />
     <ClCompile Include="CoordinateSystem.cpp" />
+    <ClCompile Include="GltfWriter.cpp" />
     <ClCompile Include="GraphId.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
@@ -202,6 +206,7 @@
     <ClCompile Include="StepWriter.cpp" />
     <ClCompile Include="StringUtils.cpp" />
     <ClCompile Include="Transform.cpp" />
+    <ClCompile Include="Triangulation.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

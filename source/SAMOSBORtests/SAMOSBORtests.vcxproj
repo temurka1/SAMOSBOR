@@ -143,6 +143,7 @@
     <ClCompile Include="AssemblyGraphBuilderTests.cpp" />
     <ClCompile Include="GraphIdTests.cpp" />
     <ClCompile Include="StepReaderTests.cpp" />
+    <ClCompile Include="TriangulationTests.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SAMOSBOR\SAMOSBOR.vcxproj">
