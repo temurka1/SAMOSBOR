@@ -2,12 +2,11 @@
 #include <SAMOSBOR/SAMOSBOR.h>
 
 namespace fs = std::filesystem;
-namespace core = SAMOSBOR::core;
-namespace assembly = SAMOSBOR::assembly::ref;
 
-using AssemblySettings = assembly::AssemblySettings;
-using AssemblyGraphSettings = assembly::AssemblyGraphSettings;
-using AssemblyBuilder = assembly::AssemblyBuilder;
+using AssemblySettings = SAMOSBOR::assembly::ref::AssemblySettings;
+
+using Pipeliner = SAMOSBOR::workflow::Pipeliner;
+using PipelineOptions = SAMOSBOR::workflow::PipelineOptions;
 
 #define USE_ABSOLUTE
 
@@ -54,19 +53,18 @@ void AssemblyCreation_Ref(benchmark::State& state, Args&&... args)
 
 	AssemblySettings settings
 	{
+		.graphId = graphId,
 		.dataPath = dataPath,
 		.outputPath = outputPath,
-		.graphSettings = AssemblyGraphSettings
-		{
-			.extensionLength = 0
-		}
+		.extensionLength = 0.0f,
+		.triangulationCoefficient = 0.3
 	};
 
-	AssemblyBuilder builder;
+	Pipeliner pipeliner;
 
 	for (auto _ : state)
 	{
-		benchmark::DoNotOptimize(builder.Build(graphId, settings));
+		benchmark::DoNotOptimize(pipeliner.RunExportPipeline(settings, PipelineOptions::EXPORT_STEP);
 	}
 }
 

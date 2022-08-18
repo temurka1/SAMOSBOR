@@ -2,7 +2,7 @@
 
 namespace SAMOSBOR::step::ref
 {
-	class StepReader;
+	class StepData;
 }
 
 namespace SAMOSBOR::core
@@ -25,12 +25,7 @@ namespace SAMOSBOR::assembly::ref
 	class AssemblyGraphBuilder final
 	{
 	public:
-		core::ResultOr<AssemblyGraph> Build(const GraphId& graphId, const AssemblySettings& settings);
-
-		AssemblyGraphBuilder();
-		~AssemblyGraphBuilder();
-	private:
-		step::StepReader* _reader;
+		core::ResultOr<AssemblyGraph> Build(const GraphId& graphId, const std::vector<step::StepData> stepData);
 	};
 }
 

@@ -3,11 +3,7 @@
 #include "GraphId.h"
 #include "AssemblyGraph.h"
 #include "AssemblyGraphBuilder.h"
-#include "AssemblySettings.hpp"
 #include "StepData.h"
-#include "StepReader.h"
-
-namespace fs = std::filesystem;
 
 namespace core = SAMOSBOR::core;
 namespace step = SAMOSBOR::step::ref;
@@ -15,44 +11,11 @@ namespace assembly = SAMOSBOR::assembly::ref;
 
 using AssemblyGraph = assembly::AssemblyGraph;
 using AssemblyGraphBuilder = assembly::AssemblyGraphBuilder;
-using AssemblySettings = assembly::AssemblySettings;
 
 using StepData = step::StepData;
-using StepReader = step::StepReader;
 
-namespace
+core::ResultOr<AssemblyGraph> AssemblyGraphBuilder::Build(const GraphId& graphId, const std::vector<StepData> stepData)
 {
-	fs::path get_input_path(const fs::path& dataPath)
-	{
-		if (dataPath.empty())
-		{
-			return fs::current_path();
-		}
-
-		return dataPath;
-	}
-
-	fs::path get_file_id(fs::path inputPath, const std::string_view& fileId)
-	{
-		fs::path path = inputPath / fileId;
-		return path.string() + ".stp";
-	}
-}
-
-AssemblyGraphBuilder::AssemblyGraphBuilder(): _reader(new StepReader())
-{
-
-}
-
-AssemblyGraphBuilder::~AssemblyGraphBuilder()
-{
-	delete _reader;
-}
-
-core::ResultOr<AssemblyGraph> AssemblyGraphBuilder::Build(const GraphId& graphId, const AssemblySettings& settings)
-{
-	std::filesystem::path inputPath = get_input_path(settings.dataPath);
-
 	const std::vector<GraphId::Vertex>& vertices = graphId.Vertices();
 	const std::vector<GraphId::Edge>& edges = graphId.Edges();
 
@@ -72,9 +35,7 @@ core::ResultOr<AssemblyGraph> AssemblyGraphBuilder::Build(const GraphId& graphId
 	//
 	for (size_t i = 0; i < vertices.size(); ++i)
 	{
-		const GraphId::Vertex& vertex = vertices[i];
-
-		ASSIGN_OR_RETURN_T(const StepData& data, _reader->Read(get_file_id(inputPath, vertex.fileId)), AssemblyGraph);
+		const StepData& data = stepData[i];
 
 		graph.pcs[i] = data.Pcs();
 		graph.mcs[i] = data.Mcs();

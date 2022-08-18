@@ -109,11 +109,11 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_DEBUG;_LIB;_SILENCE_ALL_CXX17_DEPRECATION_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;_LIB;_SILENCE_ALL_CXX17_DEPRECATION_WARNINGS;_HAS_DEPRECATED_RESULT_OF;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>C:\boost_1_79_0;$(SolutionDir)..\thirdparty\opencascade\inc;$(SolutionDir)..\thirdparty\slot_map;$(SolutionDir)..\thirdparty\googletest\inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\boost_1_79_0;$(SolutionDir)..\thirdparty\opencascade\inc;$(SolutionDir)..\thirdparty\slot_map;$(SolutionDir)..\thirdparty\pipeline\include;$(SolutionDir)..\thirdparty\googletest\inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
@@ -137,11 +137,11 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>NDEBUG;_LIB;_SILENCE_ALL_CXX17_DEPRECATION_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NDEBUG;_LIB;_SILENCE_ALL_CXX17_DEPRECATION_WARNINGS;_HAS_DEPRECATED_RESULT_OF;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
-      <AdditionalIncludeDirectories>C:\boost_1_79_0;$(SolutionDir)..\thirdparty\opencascade\inc;$(SolutionDir)..\thirdparty\slot_map;$(SolutionDir)..\thirdparty\googletest\inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\boost_1_79_0;$(SolutionDir)..\thirdparty\opencascade\inc;$(SolutionDir)..\thirdparty\slot_map;$(SolutionDir)..\thirdparty\pipeline\include;$(SolutionDir)..\thirdparty\googletest\inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
@@ -167,31 +167,44 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Assembly.h" />
     <ClInclude Include="AssemblyBuilder.h" />
     <ClInclude Include="AssemblyGraph.h" />
     <ClInclude Include="AssemblyGraphBuilder.h" />
     <ClInclude Include="AssemblySettings.hpp" />
+    <ClInclude Include="BuildAssemblyGraphStage.h" />
+    <ClInclude Include="BuildAssemblyStage.h" />
     <ClInclude Include="CoordinateSystem.h" />
     <ClInclude Include="Csw.hpp" />
+    <ClInclude Include="EmptyTypeT.hpp" />
     <ClInclude Include="GltfWriter.h" />
     <ClInclude Include="GraphId.h" />
     <ClInclude Include="Mesh.hpp" />
     <ClInclude Include="pch.h" />
+    <ClInclude Include="Pipeline.hpp" />
+    <ClInclude Include="Pipeliner.h" />
+    <ClInclude Include="ReadStepStage.h" />
     <ClInclude Include="Result.hpp" />
     <ClInclude Include="ResultOr.hpp" />
     <ClInclude Include="SAMOSBOR.h" />
     <ClInclude Include="Shape.hpp" />
+    <ClInclude Include="Stage.hpp" />
     <ClInclude Include="StepData.h" />
     <ClInclude Include="StepReader.h" />
     <ClInclude Include="StepWriter.h" />
     <ClInclude Include="StringUtils.h" />
     <ClInclude Include="Transform.h" />
     <ClInclude Include="Triangulation.h" />
+    <ClInclude Include="WriteGltfStage.h" />
+    <ClInclude Include="WriteStepStage.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Assembly.cpp" />
     <ClCompile Include="AssemblyBuilder.cpp" />
     <ClCompile Include="AssemblyGraph.cpp" />
     <ClCompile Include="AssemblyGraphBuilder.cpp" />
+    <ClCompile Include="BuildAssemblyGraphStage.cpp" />
+    <ClCompile Include="BuildAssemblyStage.cpp" />
     <ClCompile Include="CoordinateSystem.cpp" />
     <ClCompile Include="GltfWriter.cpp" />
     <ClCompile Include="GraphId.cpp" />
@@ -201,12 +214,16 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="Pipeliner.cpp" />
+    <ClCompile Include="ReadStepStage.cpp" />
     <ClCompile Include="StepData.cpp" />
     <ClCompile Include="StepReader.cpp" />
     <ClCompile Include="StepWriter.cpp" />
     <ClCompile Include="StringUtils.cpp" />
     <ClCompile Include="Transform.cpp" />
     <ClCompile Include="Triangulation.cpp" />
+    <ClCompile Include="WriteGltfStage.cpp" />
+    <ClCompile Include="WriteStepStage.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

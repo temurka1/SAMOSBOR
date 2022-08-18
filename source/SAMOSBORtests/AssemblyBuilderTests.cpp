@@ -6,7 +6,6 @@ namespace core = SAMOSBOR::core;
 namespace assembly = SAMOSBOR::assembly::ref;
 
 using AssemblySettings = assembly::AssemblySettings;
-using AssemblyGraphSettings = assembly::AssemblyGraphSettings;
 using AssemblyBuilder = assembly::AssemblyBuilder;
 
 class AssemblyBuilderTests : public ::testing::Test
@@ -39,14 +38,11 @@ TEST_F(AssemblyBuilderTests, AssemblyTwoNodes)
 	{
 		.dataPath = fs::path("../../../data/tool_3"),
 		.outputPath = outputDirPath / "assembly_3.stp",
-		.graphSettings = AssemblyGraphSettings
-		{
-			.extensionLength = 0
-		}
+		.extensionLength = 0.0f
 	};
 
 	AssemblyBuilder builder;
-	core::Result result = builder.Build(graphId, settings);
+	auto result = builder.Build(graphId, settings);
 
 	EXPECT_TRUE(result.Ok());
 	EXPECT_TRUE(fs::exists(settings.outputPath));
@@ -61,14 +57,12 @@ TEST_F(AssemblyBuilderTests, AssemblyWithMultipleCsw)
 	{
 		.dataPath = fs::path("../../../data/tool_5"),
 		.outputPath = outputDirPath / "assembly_5.stp",
-		.graphSettings = AssemblyGraphSettings
-		{
-			.extensionLength = 0
-		}
+		.extensionLength = 0,
+		.triangulationCoefficient = 1.0
 	};
 
 	AssemblyBuilder builder;
-	core::Result result = builder.Build(graphId, settings);
+	auto result = builder.Build(graphId, settings);
 
 	EXPECT_TRUE(result.Ok());
 	EXPECT_TRUE(fs::exists(settings.outputPath));

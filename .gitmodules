@@ -16,3 +16,6 @@
 [submodule "thirdparty/googlebenchmark"]
 	path = thirdparty/googlebenchmark
 	url = https://github.com/predeps/googlebenchmark
+[submodule "thirdparty/pipeline"]
+	path = thirdparty/pipeline
+	url = https://github.com/p-ranav/pipeline.git
