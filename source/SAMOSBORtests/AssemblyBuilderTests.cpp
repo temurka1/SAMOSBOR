@@ -50,7 +50,7 @@ TEST_F(AssemblyBuilderTests, AssemblyTwoNodes)
 
 	EXPECT_TRUE(result.Ok());
 	EXPECT_TRUE(fs::exists(settings.outputPath));
-	EXPECT_EQ(2000237, fs::file_size(settings.outputPath));
+	EXPECT_EQ(573174, fs::file_size(settings.outputPath));
 }
 
 TEST_F(AssemblyBuilderTests, AssemblyWithMultipleCsw)
@@ -72,5 +72,5 @@ TEST_F(AssemblyBuilderTests, AssemblyWithMultipleCsw)
 
 	EXPECT_TRUE(result.Ok());
 	EXPECT_TRUE(fs::exists(settings.outputPath));
-	EXPECT_EQ(4117844, fs::file_size(settings.outputPath));
+	EXPECT_EQ(1430005, fs::file_size(settings.outputPath));
 }

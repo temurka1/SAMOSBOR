@@ -70,6 +70,12 @@
     <ClInclude Include="GraphId.h">
       <Filter>assembly</Filter>
     </ClInclude>
+    <ClInclude Include="CuttingEdge.hpp">
+      <Filter>core\occ</Filter>
+    </ClInclude>
+    <ClInclude Include="Trace.hpp">
+      <Filter>core</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">

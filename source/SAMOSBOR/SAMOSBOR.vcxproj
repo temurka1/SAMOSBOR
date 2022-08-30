@@ -124,7 +124,7 @@
     </Link>
     <Lib>
       <AdditionalLibraryDirectories>$(SolutionDir)..\thirdparty\opencascade\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>TKernel.lib;TKXSBase.lib;TKSTEPBase.lib;TKSTEP.lib;TKG3d.lib;TKMath.lib;TKTopAlgo.lib;TKBRep.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>TKernel.lib;TKXSBase.lib;TKSTEPBase.lib;TKSTEP.lib;TKG3d.lib;TKMath.lib;TKTopAlgo.lib;TKBRep.lib;TKShHealing.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalOptions>/ignore:4006 %(AdditionalOptions)</AdditionalOptions>
     </Lib>
     <PostBuildEvent>
@@ -159,7 +159,7 @@
     </Link>
     <Lib>
       <AdditionalLibraryDirectories>$(SolutionDir)..\thirdparty\opencascade\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>TKernel.lib;TKXSBase.lib;TKSTEPBase.lib;TKSTEP.lib;TKG3d.lib;TKMath.lib;TKTopAlgo.lib;TKBRep.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>TKernel.lib;TKXSBase.lib;TKSTEPBase.lib;TKSTEP.lib;TKG3d.lib;TKMath.lib;TKTopAlgo.lib;TKBRep.lib;TKShHealing.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalOptions>/ignore:4006 %(AdditionalOptions)</AdditionalOptions>
     </Lib>
     <PostBuildEvent>
@@ -173,6 +173,7 @@
     <ClInclude Include="AssemblySettings.hpp" />
     <ClInclude Include="CoordinateSystem.h" />
     <ClInclude Include="Csw.hpp" />
+    <ClInclude Include="CuttingEdge.hpp" />
     <ClInclude Include="GraphId.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Result.hpp" />
@@ -183,6 +184,7 @@
     <ClInclude Include="StepReader.h" />
     <ClInclude Include="StepWriter.h" />
     <ClInclude Include="StringUtils.h" />
+    <ClInclude Include="Trace.hpp" />
     <ClInclude Include="Transform.h" />
   </ItemGroup>
   <ItemGroup>

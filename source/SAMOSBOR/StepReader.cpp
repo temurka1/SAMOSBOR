@@ -8,41 +8,45 @@ namespace core = SAMOSBOR::core;
 using StepData = SAMOSBOR::step::ref::StepData;
 using StepReader = SAMOSBOR::step::ref::StepReader;
 
-StepReader::StepReader(): _reader(new STEPControl_Reader)
+StepReader::StepReader()
 {
 	Interface_Static::SetIVal("read.step.root.transformation", 0);
+
+	//// disable parametric curves
+	Interface_Static::SetIVal("write.surfacecurve.mode", 0);
+	Interface_Static::SetIVal("write.step.assembly", 1);
 }
 
 StepReader::~StepReader()
 {
-	delete _reader;
 }
 
 core::ResultOr<StepData> StepReader::Read(const std::filesystem::path& filepath, bool printCheckload)
 {
 	std::string modelFileName = filepath.string();
 
-	IFSelect_ReturnStatus status = _reader->ReadFile(modelFileName.c_str());
+	STEPControl_Reader reader;
+	IFSelect_ReturnStatus status = reader.ReadFile(modelFileName.c_str());
 
 	if (status != IFSelect_RetDone)
 	{
 		return core::ResultOr<StepData>(core::Result(core::Result::StatusCode::ERROR));
 	}
 
-	_reader->TransferRoots();
+	reader.TransferRoots();
 
 	if (printCheckload)
 	{
-		_reader->PrintCheckLoad(true, IFSelect_ItemsByEntity);
-		_reader->PrintCheckTransfer(true, IFSelect_ItemsByEntity);
+		reader.PrintCheckLoad(true, IFSelect_ItemsByEntity);
+		reader.PrintCheckTransfer(true, IFSelect_ItemsByEntity);
 	}
 
-	Standard_Integer numberOfShapes = _reader->NbShapes();
+	Standard_Integer numberOfShapes = reader.NbShapes();
 	if (numberOfShapes == 0)
 	{
 		return core::ResultOr<StepData>(core::Result(core::Result::StatusCode::ERROR, "No shapes in STEP file"));
 	}
 
-	StepData stepData(_reader->Model(), _reader->OneShape());
+	StepData stepData(reader.StepModel(), reader.OneShape());
 	return core::ResultOr<StepData>(std::move(stepData));
 }

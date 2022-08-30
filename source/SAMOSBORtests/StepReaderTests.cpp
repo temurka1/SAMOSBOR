@@ -12,6 +12,7 @@ using StepReader = step::StepReader;
 
 using Csw = core::occ::Csw;
 using Shape = core::occ::Shape;
+using CuttingEdge = core::occ::CuttingEdge;
 using CoordinateSystem = core::occ::CoordinateSystem;
 
 TEST(StepReaderTests, OpenStepFile)
@@ -54,4 +55,18 @@ TEST(StepReaderTests, CorrectCoordinateSystems)
 	EXPECT_EQ(0.0, mcs.origin.X());
 	EXPECT_EQ(0.0, mcs.origin.Y());
 	EXPECT_EQ(0.0, mcs.origin.Z());
+}
+
+TEST(StepReaderTests, CuttingEdgePartExists)
+{
+	std::filesystem::path filePath = fs::path("../../../data/tool_6/UKDV1000X4CV.STP");
+
+	StepReader reader;
+	core::ResultOr<StepData> result = reader.Read(filePath);
+
+	EXPECT_TRUE(result.Ok());
+
+	const CuttingEdge ce = result.Value().CuttingEdge();
+
+	EXPECT_FALSE(ce.IsNull());
 }

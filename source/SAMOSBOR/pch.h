@@ -14,18 +14,33 @@
 #include <StepData_StepModel.hxx>
 #include <StepGeom_Axis2Placement3d.hxx>
 #include <StepGeom_CartesianPoint.hxx>
+#include <StepGeom_Curve.hxx>
+#include <StepGeom_Line.hxx>
+#include <StepGeom_TrimmedCurve.hxx>
+#include <StepGeom_CompositeCurve.hxx>
 #include <StepRepr_Representation.hxx>
+#include <StepRepr_ShapeRepresentationRelationship.hxx>
+#include <StepShape_ShapeRepresentation.hxx>
+#include <StepShape_GeometricSet.hxx>
 #include <Interface_InterfaceModel.hxx>
 #include <TCollection_HAsciiString.hxx>
 #include <Standard_Handle.hxx>
 #include <Interface_Static.hxx>
 #include <Interface_EntityIterator.hxx>
+#include <Geom_Line.hxx>
 #include <Geom_Axis2Placement.hxx>
+#include <Geom_TrimmedCurve.hxx>
 #include <StepToGeom.hxx>
+#include <StepToTopoDS_TranslateCompositeCurve.hxx>
 #include <BRepBuilderAPI_Copy.hxx>
+#include <BRepBuilderAPI_MakeEdge.hxx>
+#include <BRepBuilderAPI_MakeWire.hxx>
+#include <BRepLib_WireError.hxx>
 #include <Message.hxx>
 #include <Message_Messenger.hxx>
 #include <Message_PrinterOStream.hxx>
+#include <Transfer_TransientProcess.hxx>
+#include <ShapeFix_ShapeTolerance.hxx>
 
 #include <gp_Pnt2d.hxx>
 #include <gp_Ax3.hxx>
@@ -38,5 +53,7 @@
 #include <string_view>
 #include <charconv>
 #include <filesystem>
+#include <algorithm>
+#include <variant>
 
 #endif //PCH_H
