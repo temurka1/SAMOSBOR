@@ -11,10 +11,6 @@ using StepReader = SAMOSBOR::step::ref::StepReader;
 StepReader::StepReader()
 {
 	Interface_Static::SetIVal("read.step.root.transformation", 0);
-
-	//// disable parametric curves
-	Interface_Static::SetIVal("write.surfacecurve.mode", 0);
-	Interface_Static::SetIVal("write.step.assembly", 1);
 }
 
 StepReader::~StepReader()
@@ -30,7 +26,7 @@ core::ResultOr<StepData> StepReader::Read(const std::filesystem::path& filepath,
 
 	if (status != IFSelect_RetDone)
 	{
-		return core::ResultOr<StepData>(core::Result(core::Result::StatusCode::ERROR));
+		return core::ResultOr<StepData>(core::Result(core::Result::ERROR));
 	}
 
 	reader.TransferRoots();

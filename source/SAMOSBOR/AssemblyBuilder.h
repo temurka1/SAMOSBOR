@@ -2,31 +2,20 @@
 
 namespace SAMOSBOR::core
 {
-	class Result;
-}
-
-namespace SAMOSBOR::step::ref
-{
-	class StepWriter;
+	template<typename T> class ResultOr;
 }
 
 namespace SAMOSBOR::assembly::ref
 {
 	namespace core = SAMOSBOR::core;
-	namespace step = SAMOSBOR::step::ref;
 
+	class Assembly;
+	struct AssemblyGraph;
 	struct AssemblySettings;
-	class AssemblyGraphBuilder;
 
 	class AssemblyBuilder
 	{
 	public:
-		AssemblyBuilder(bool silenceOcctMessages = true);
-		~AssemblyBuilder();
-
-		core::Result Build(const std::string_view& graphString, const AssemblySettings& settings);
-	private:
-		AssemblyGraphBuilder* _graphBuilder;
-		step::StepWriter* _stepWriter;
+		core::ResultOr<Assembly> Build(const AssemblyGraph& graph, const AssemblySettings& settings);
 	};
 }

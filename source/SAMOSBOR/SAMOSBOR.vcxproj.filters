@@ -19,6 +19,18 @@
     <Filter Include="core\occ">
       <UniqueIdentifier>{fb118bdd-cf72-4080-9191-134be998643b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="gltf">
+      <UniqueIdentifier>{e8d7c5f2-3f84-4984-8f60-033a50e9ce6d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="workflow">
+      <UniqueIdentifier>{5f52209f-7213-4d38-bd91-7d1431df7e83}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="workflow\stages">
+      <UniqueIdentifier>{cb6fdeb2-c68d-47c1-92a4-89634b90a671}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="core\pipeline">
+      <UniqueIdentifier>{ee789ad8-36fc-453b-8a03-beaa5e56f5dd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
@@ -70,11 +82,50 @@
     <ClInclude Include="GraphId.h">
       <Filter>assembly</Filter>
     </ClInclude>
-    <ClInclude Include="CuttingEdge.hpp">
+    <ClInclude Include="GltfWriter.h">
+      <Filter>gltf</Filter>
+    </ClInclude>
+    <ClInclude Include="Mesh.hpp">
+      <Filter>core\occ</Filter>
+    </ClInclude>
+        <ClInclude Include="CuttingEdge.hpp">
       <Filter>core\occ</Filter>
     </ClInclude>
     <ClInclude Include="Trace.hpp">
       <Filter>core</Filter>
+    </ClInclude>
+    <ClInclude Include="Triangulation.h">
+      <Filter>core\occ</Filter>
+    </ClInclude>
+    <ClInclude Include="Pipeliner.h">
+      <Filter>workflow</Filter>
+    </ClInclude>
+    <ClInclude Include="Assembly.h">
+      <Filter>assembly</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage.hpp">
+      <Filter>workflow</Filter>
+    </ClInclude>
+    <ClInclude Include="ReadStepStage.h">
+      <Filter>workflow\stages</Filter>
+    </ClInclude>
+    <ClInclude Include="BuildAssemblyGraphStage.h">
+      <Filter>workflow\stages</Filter>
+    </ClInclude>
+    <ClInclude Include="BuildAssemblyStage.h">
+      <Filter>workflow\stages</Filter>
+    </ClInclude>
+    <ClInclude Include="WriteStepStage.h">
+      <Filter>workflow\stages</Filter>
+    </ClInclude>
+    <ClInclude Include="WriteGltfStage.h">
+      <Filter>workflow\stages</Filter>
+    </ClInclude>
+    <ClInclude Include="EmptyTypeT.hpp">
+      <Filter>core</Filter>
+    </ClInclude>
+    <ClInclude Include="Pipeline.hpp">
+      <Filter>core\pipeline</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -110,6 +161,33 @@
     </ClCompile>
     <ClCompile Include="GraphId.cpp">
       <Filter>assembly</Filter>
+    </ClCompile>
+    <ClCompile Include="GltfWriter.cpp">
+      <Filter>gltf</Filter>
+    </ClCompile>
+    <ClCompile Include="Triangulation.cpp">
+      <Filter>core\occ</Filter>
+    </ClCompile>
+    <ClCompile Include="Pipeliner.cpp">
+      <Filter>workflow</Filter>
+    </ClCompile>
+    <ClCompile Include="Assembly.cpp">
+      <Filter>assembly</Filter>
+    </ClCompile>
+    <ClCompile Include="ReadStepStage.cpp">
+      <Filter>workflow\stages</Filter>
+    </ClCompile>
+    <ClCompile Include="BuildAssemblyGraphStage.cpp">
+      <Filter>workflow\stages</Filter>
+    </ClCompile>
+    <ClCompile Include="BuildAssemblyStage.cpp">
+      <Filter>workflow\stages</Filter>
+    </ClCompile>
+    <ClCompile Include="WriteStepStage.cpp">
+      <Filter>workflow\stages</Filter>
+    </ClCompile>
+    <ClCompile Include="WriteGltfStage.cpp">
+      <Filter>workflow\stages</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

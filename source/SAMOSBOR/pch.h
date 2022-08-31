@@ -23,11 +23,12 @@
 #include <StepShape_ShapeRepresentation.hxx>
 #include <StepShape_GeometricSet.hxx>
 #include <Interface_InterfaceModel.hxx>
-#include <TCollection_HAsciiString.hxx>
-#include <Standard_Handle.hxx>
 #include <Interface_Static.hxx>
 #include <Interface_EntityIterator.hxx>
 #include <Geom_Line.hxx>
+#include <TCollection_HAsciiString.hxx>
+#include <TColgp_Array1OfDir.hxx>
+#include <Standard_Handle.hxx>
 #include <Geom_Axis2Placement.hxx>
 #include <Geom_TrimmedCurve.hxx>
 #include <StepToGeom.hxx>
@@ -39,6 +40,21 @@
 #include <Message.hxx>
 #include <Message_Messenger.hxx>
 #include <Message_PrinterOStream.hxx>
+#include <BRepBndLib.hxx>
+#include <BRep_Tool.hxx>
+#include <BRep_Builder.hxx>
+#include <BRepMesh_IncrementalMesh.hxx>
+#include <BRepBuilderAPI_Copy.hxx>
+#include <TopExp_Explorer.hxx>
+#include <TopoDS.hxx>
+#include <TopoDS_Face.hxx>
+#include <TopoDS_Compound.hxx>
+#include <Poly_Triangulation.hxx>
+#include <Bnd_Box.hxx>
+#include <Precision.hxx>
+
+#include <Poly_Connect.hxx>
+#include <GeomLib.hxx>
 #include <Transfer_TransientProcess.hxx>
 #include <ShapeFix_ShapeTolerance.hxx>
 

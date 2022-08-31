@@ -4,13 +4,15 @@
 namespace fs = std::filesystem;
 
 namespace core = SAMOSBOR::core;
+namespace step = SAMOSBOR::step::ref;
 namespace assembly = SAMOSBOR::assembly::ref;
+
+using StepData = step::StepData;
 
 using GraphId = assembly::GraphId;
 using AssemblyGraph = assembly::AssemblyGraph;
 using AssemblyGraphBuilder = assembly::AssemblyGraphBuilder;
 using AssemblySettings = assembly::AssemblySettings;
-using AssemblyGraphSettings = assembly::AssemblyGraphSettings;
 
 TEST(AssemblyGraphBuilderTests, AssemblyTwoNodes)
 {
@@ -18,16 +20,14 @@ TEST(AssemblyGraphBuilderTests, AssemblyTwoNodes)
 
 	AssemblySettings graphSettings
 	{
+		.graphId = "15107_0.20_1#0+1",
 		.dataPath = fs::path("../../../data/tool_3"),
 		.outputPath = fs::path(""),
-		.graphSettings = AssemblyGraphSettings
-		{
-			.extensionLength = 0
-		}		
+		.extensionLength = 0,
 	};
 
 	AssemblyGraphBuilder builder;
-	core::ResultOr<AssemblyGraph> result = builder.Build(graphId, graphSettings);
+	core::ResultOr<AssemblyGraph> result = builder.Build(graphId, data);
 
 	EXPECT_TRUE(result.Ok());
 
@@ -46,16 +46,14 @@ TEST(AssemblyGraphBuilderTests, AssemblyWithMultipleCsw)
 
 	AssemblySettings graphSettings
 	{
+		.graphId = "avtA_0.Qlwi_1.LoOYVa_2.wX_3.ZfTr_4.wNC_5#0+1.1+2@3235633.1+3@3235634.1+4@49.2+5@3235633",
 		.dataPath = fs::path("../../../data/tool_5"),
 		.outputPath = fs::path(""),
-		.graphSettings = AssemblyGraphSettings
-		{
-			.extensionLength = 0
-		}
+		.extensionLength = 0,
 	};
 
 	AssemblyGraphBuilder builder;
-	core::ResultOr<AssemblyGraph> result = builder.Build(graphId, graphSettings);
+	core::ResultOr<AssemblyGraph> result = builder.Build(graphId, );
 
 	EXPECT_TRUE(result.Ok());
 

@@ -4,18 +4,15 @@
 namespace SAMOSBOR::assembly::ref
 {
 	/// <summary>
-	/// Settings for assembly graph
-	/// </summary>
-	struct AssemblyGraphSettings
-	{
-		float extensionLength;
-	};
-
-	/// <summary>
 	/// Settings for assembly
 	/// </summary>
 	struct AssemblySettings
 	{
+		/// <summary>
+		/// Graph Id string
+		/// </summary>
+		std::string graphId;
+
 		/// <summary>
 		/// Path to folder with STEP files
 		/// </summary>
@@ -27,9 +24,14 @@ namespace SAMOSBOR::assembly::ref
 		std::filesystem::path outputPath;
 
 		/// <summary>
-		/// Graph settings
+		/// Tool items extension length
 		/// </summary>
-		AssemblyGraphSettings graphSettings;
+		float extensionLength;
+
+		/// <summary>
+		/// Triangulation coefficient
+		/// </summary>
+		double triangulationCoefficient;
 	};
 }
 

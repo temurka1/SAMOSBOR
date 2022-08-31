@@ -3,14 +3,16 @@
 namespace fs = std::filesystem;
 
 using ArgumentParser = argparse::ArgumentParser;
-using AssemblyBuilder = SAMOSBOR::assembly::ref::AssemblyBuilder;
+
 using AssemblySettings = SAMOSBOR::assembly::ref::AssemblySettings;
-using AssemblyGraphSettings = SAMOSBOR::assembly::ref::AssemblyGraphSettings;
+
+using Pipeliner = SAMOSBOR::workflow::Pipeliner;
+using PipelineOptions = SAMOSBOR::workflow::PipelineOptions;
 
 using Result = SAMOSBOR::core::Result;
 
 // Usage: 
-// SAMOSBORcmd.exe --id 15107_0h.20_1t#0+1 --i data/tool3 --o assembly.stp --l 40
+// SAMOSBORcmd.exe --id 15107_0h.20_1t#0+1 --i data/tool3 --o assembly_out --l 40 --gltf --step
 
 int main(int argc, char* argv[])
 {
@@ -18,26 +20,40 @@ int main(int argc, char* argv[])
 
 	program.add_description("Command-line tool to create tool assembly STEP model");
 
-	program.add_argument("--id").help("assembly graph id string").required();
-	program.add_argument("--i").help("path with input STEP files").required();
-	program.add_argument("--o").help("output tool assembly file").required();
+	program.add_argument("--id").help("assembly graph id").required();
+	program.add_argument("--i").help("input path").required();
+	program.add_argument("--o").help("output path").required();
 	program.add_argument("--l").help("extension length").default_value(0).scan<'i', int>();
+	program.add_argument("--trc").help("triangulation coefficient").default_value(0.33).scan<'g', double>();
+	program.add_argument("--gltf").help("output tool assembly as glTF").default_value(false).implicit_value(true);
+	program.add_argument("--step").help("output tool assembly as STEP").default_value(false).implicit_value(true);
 	program.add_argument("help");
 
 	program.parse_args(argc, argv);
 
 	AssemblySettings settings
 	{
+		.graphId = program.get<std::string>("--id"),
 		.dataPath = fs::current_path() / program.get<std::string>("--i"),
 		.outputPath = fs::current_path() / program.get<std::string>("--o"),
-		.graphSettings = AssemblyGraphSettings
-		{
-			.extensionLength = program.get<float>("--l")
-		}
+		.extensionLength = program.get<float>("--l"),
+		.triangulationCoefficient = program.get<double>("--trc")
 	};
 
-	AssemblyBuilder assemblyBuilder;
-	Result result = assemblyBuilder.Build(program.get<std::string>("--s"), settings);
+	uint32_t pipelineOptions = 0;
+
+	if (program.get<bool>("--step"))
+	{
+		pipelineOptions |= PipelineOptions::EXPORT_STEP;
+	}
+
+	if (program.get<bool>("--gltf"))
+	{
+		pipelineOptions |= PipelineOptions::EXPORT_GLTF;
+	}
+
+	Pipeliner pipeliner;
+	Result result = pipeliner.RunExportPipeline(settings, pipelineOptions);
 
 	if (!result.Ok())
 	{

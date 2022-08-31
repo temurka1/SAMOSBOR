@@ -1,39 +1,27 @@
 #include "pch.h"
 #include "Result.hpp"
 #include "ResultOr.hpp"
+#include "Mesh.hpp"
 #include "Shape.hpp"
-#include "StepWriter.h"
-#include "GraphId.h"
+
+#include "Assembly.h"
 #include "AssemblyGraph.h"
 #include "AssemblySettings.hpp"
 #include "AssemblyBuilder.h"
-#include "AssemblyGraphBuilder.h"
+
+#include "Triangulation.h"
 
 namespace core = SAMOSBOR::core;
 namespace occ = SAMOSBOR::core::occ;
 namespace occt = opencascade;
 
-using GraphId = SAMOSBOR::assembly::ref::GraphId;
+using Assembly = SAMOSBOR::assembly::ref::Assembly;
 using AssemblyGraph = SAMOSBOR::assembly::ref::AssemblyGraph;
 using AssemblyBuilder = SAMOSBOR::assembly::ref::AssemblyBuilder;
-using AssemblyGraphBuilder = SAMOSBOR::assembly::ref::AssemblyGraphBuilder;
 using AssemblySettings = SAMOSBOR::assembly::ref::AssemblySettings;
-
-using StepWriter = SAMOSBOR::step::ref::StepWriter;
 
 namespace
 {
-	__forceinline void silence_occt()
-	{
-		occt::handle<Message_Messenger> messenger = Message::DefaultMessenger();
-		Message_SequenceOfPrinters printers = Message::DefaultMessenger()->Printers();
-
-		for (auto it = printers.begin(); it != printers.end(); it++)
-		{
-			messenger->RemovePrinter(*it);
-		}
-	}
-
 	__forceinline void transform_shapes(const AssemblyGraph& graph, std::vector<TopoDS_Shape>* output)
 	{	
 		// no need to transform root toolitem
@@ -48,30 +36,27 @@ namespace
 			output->push_back(shape.Moved(loc, false));
 		}
 	}
-}
 
-AssemblyBuilder::AssemblyBuilder(bool silenceOcctMessages): _graphBuilder(new AssemblyGraphBuilder()), _stepWriter(new StepWriter())
-{
-	if (silenceOcctMessages)
+	__forceinline void triangulate_shapes(const std::vector<TopoDS_Shape> shapes, const double coefficient, std::vector<occ::Mesh>* meshes)
 	{
-		silence_occt();
+		for (const TopoDS_Shape& shape : shapes)
+		{
+			occ::Triangulation triangulation(shape, coefficient, true);
+			meshes->push_back(triangulation.GetMesh());
+		}
 	}
 }
 
-AssemblyBuilder::~AssemblyBuilder()
+core::ResultOr<Assembly> AssemblyBuilder::Build(const AssemblyGraph& graph, const AssemblySettings& settings)
 {
-	delete _graphBuilder;
-	delete _stepWriter;
-}
+	std::vector<TopoDS_Shape> transformedShapes;
+	transformedShapes.reserve(graph.shapes.size());
 
-core::Result AssemblyBuilder::Build(const std::string_view& graphString, const AssemblySettings& settings)
-{
-	ASSIGN_OR_RETURN(const AssemblyGraph& graph, _graphBuilder->Build(GraphId(graphString), settings));
+	std::vector<occ::Mesh> meshes;
+	meshes.reserve(graph.shapes.size());
 
-	std::vector<TopoDS_Shape> outputShapes;
-	outputShapes.reserve(graph.shapes.size());
+	transform_shapes(graph, &transformedShapes);
+	triangulate_shapes(transformedShapes, settings.triangulationCoefficient, &meshes);
 
-	transform_shapes(graph, &outputShapes);
-
-	return _stepWriter->Write(settings.outputPath, outputShapes);
+	return Assembly(transformedShapes, meshes);
 }
