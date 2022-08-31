@@ -88,6 +88,12 @@
     <ClInclude Include="Mesh.hpp">
       <Filter>core\occ</Filter>
     </ClInclude>
+        <ClInclude Include="CuttingEdge.hpp">
+      <Filter>core\occ</Filter>
+    </ClInclude>
+    <ClInclude Include="Trace.hpp">
+      <Filter>core</Filter>
+    </ClInclude>
     <ClInclude Include="Triangulation.h">
       <Filter>core\occ</Filter>
     </ClInclude>

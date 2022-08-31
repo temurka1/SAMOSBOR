@@ -178,6 +178,7 @@
     <ClInclude Include="Csw.hpp" />
     <ClInclude Include="EmptyTypeT.hpp" />
     <ClInclude Include="GltfWriter.h" />
+    <ClInclude Include="CuttingEdge.hpp" />
     <ClInclude Include="GraphId.h" />
     <ClInclude Include="Mesh.hpp" />
     <ClInclude Include="pch.h" />
@@ -193,6 +194,7 @@
     <ClInclude Include="StepReader.h" />
     <ClInclude Include="StepWriter.h" />
     <ClInclude Include="StringUtils.h" />
+    <ClInclude Include="Trace.hpp" />
     <ClInclude Include="Transform.h" />
     <ClInclude Include="Triangulation.h" />
     <ClInclude Include="WriteGltfStage.h" />

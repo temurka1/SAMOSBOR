@@ -43,6 +43,6 @@ core::ResultOr<StepData> StepReader::Read(const std::filesystem::path& filepath,
 		return core::ResultOr<StepData>(core::Result(core::Result::StatusCode::ERROR, "No shapes in STEP file"));
 	}
 
-	StepData stepData(reader.Model(), reader.OneShape());
+	StepData stepData(reader.StepModel(), reader.OneShape());
 	return core::ResultOr<StepData>(std::move(stepData));
 }
